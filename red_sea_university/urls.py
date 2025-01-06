@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path
 from student_clubs.views import MyLogin, StudentDash, EventCreateView, EventListView, EventUpdateView, ListEvent, CreateEvent, UpdateEvent, ListActivity, UpdateEventAdmin, ListActivityAdmin, ListActivityAdminDashboard, UpdateEventAdminDashboard, ClubListView, ClubCreateView, ClubUpdateView, StudentClubs, About, StudentEvent, AdminActivityPost, sign_up_student
 from django.contrib.auth.views import LogoutView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,3 +28,8 @@ urlpatterns = [
     path('Student/CreateAccount', sign_up_student ,name='signup'),
     path('logout/',LogoutView.as_view(next_page='homepage'),name='logout')
 ]
+
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
