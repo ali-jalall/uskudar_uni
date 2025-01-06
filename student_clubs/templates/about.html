@@ -1,0 +1,93 @@
+{%extends "navbar.html"%}
+{%load static%}
+
+
+{%block content%}
+<style>
+  .container {
+    display: flex;
+    justify-content: space-between; /* Sütunları eşit bir şekilde ayır */
+    padding: 20px;
+    max-width: 800px; /* Konteynerin maksimum genişliği */
+    margin: auto; /* Konteyneri sayfa ortasına yerleştir */
+  }
+  
+  .column {
+    width: calc(50% - 10px); /* Yüzdelik genişlik ve sütunlar arası boşluk */
+    text-align: left; /* Metni sola hizala */
+  }
+  
+  .column h2 {
+    font-size: 24px; /* Başlık font boyutu */
+    font-weight: bold; /* Başlık font kalınlığı */
+    margin-bottom: 5px; /* Başlık altı boşluk */
+  }
+  
+  .column .underline {
+    width: 50px; /* Alt çizgi genişliği */
+    height: 3px; /* Alt çizgi kalınlığı */
+    background-color: black; /* Alt çizgi rengi */
+    margin-bottom: 20px; /* Alt çizgi altı boşluk */
+  }
+  
+  .column p {
+    font-size: 16px; /* Paragraf font boyutu */
+  }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .header {
+            background-color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            margin: 0;
+            color: #333;
+        }
+        .main-content {
+            background-color: #fff;
+            margin: 20px 0;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+    </style>
+
+    <div class="header mt-5">
+        <h1>About Us</h1>
+    </div>
+
+    <div class="main-content">
+        <h1>Welcome to Red Sea University Clubs</h1>
+        <p>At Red Sea University, we're passionate about enhancing the university experience by providing a centralized platform for clubs to showcase their events and engage with the student community. Whether you're a club officer, a student looking for exciting activities, or a university staff member interested in campus life, we're here to connect you with the latest events and opportunities on campus.</p>
+    </div>
+
+    <div class="container">
+        <div class="column">
+          <h2>What We Offer</h2>
+          <div class="underline"></div>
+          <p>
+            On Red Sea University, clubs have the opportunity to showcase their events and reach a wider audience of students. Our user-friendly interface allows club officers to easily create and manage event listings, providing all the necessary details, such as date, time, location, and description.
+          </p>
+        </div>
+        
+        <div class="column">
+          <h2>Join Our Community</h2>
+          <div class="underline"></div>
+          <p>
+            Whether you're a club officer looking to promote your events or a student eager to explore campus activities, we invite you to join our vibrant community on Uskudar University. Together, let's make the most of the university experience and create unforgettable memories.
+          </p>
+        </div>
+      </div>
+
+    
+
+
+  {%endblock%}

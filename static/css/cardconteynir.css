@@ -1,0 +1,35 @@
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adjusts space between cards */
+    padding: 20px;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 300px; /* Width of the card */
+    margin: 10px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden; /* Ensures the image corners match card corners */
+  }
+  
+  .card img {
+    width: 100%;
+    display: block; /* Removes bottom space under the image */
+  }
+  
+  .card h3 {
+    margin: 16px 0;
+  }
+  
+  /* Add a hover effect for the cards */
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  }
+  

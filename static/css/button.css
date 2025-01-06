@@ -1,0 +1,28 @@
+                /* Buton için CSS Stilleri */
+                .button-container {
+                    display: flex;
+                    justify-content: center; /* Butonu ortalar */
+                    padding: 2rem; /* Çevresinde boşluk bırakır */
+                    margin-left: auto;
+                    margin-right: auto;
+                    text-align: center;
+                }
+                
+                .fancy-button {
+                    padding: 1rem 2rem; /* Buton içi boşluk */
+                    background-color: #007bff; /* Mavi arkaplan rengi */
+                    color: white; /* Metin rengi beyaz */
+                    text-transform: uppercase; /* Metin büyük harfler */
+                    text-decoration: none; /* Metin altı çizgi kaldırır */
+                    border-radius: 5px; /* Kenarları yuvarlaklaştırır */
+                    transition: background-color 0.3s ease; /* Arkaplan rengi geçişi yumuşatır */
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+                    display: inline-block; /* Düzgün görünüm sağlar */
+                }
+                
+                .fancy-button:hover {
+                    background-color: #0056b3; /* Hover durumunda arkaplan rengi */
+                    text-decoration: none; /* Hover durumunda metin altı çizgi kaldırır */
+                    color: white; /* Hover durumunda metin rengi beyaz */
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Hover durumunda gölge efekti */
+                }

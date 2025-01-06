@@ -1,0 +1,145 @@
+{%extends "admin_navbar.html"%}
+{%load static%}
+
+{%block content%}
+    <div class="dashboard-card">
+      <h3>Total Members</h3>
+      <span class="number">{{total_users}}</span>
+      <i class="fas fa-user-plus"></i>
+    </div>
+
+    <!-- Kart 3 -->
+    <div class="dashboard-card">
+      <h3>Total Events</h3>
+      <span class="number">{{total_events}}</span>
+      <i class="fas fa-calendar-check"></i>
+    </div>
+  </div>
+  <!-- Tablo bölümü -->
+<div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Event</th>
+          <th scope="col">Type</th>
+          <th scope="col">time</th>
+          <th scope="col">State</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in events %}
+              <tr>
+                <td>{{ event.event_name }}</td>
+                <td>{{event.event_type}}</td>
+                <td>{{event.event_date}}</td>
+                <td><button type="button" class="btn btn-primary"><a href="{%url 'update_event' pk=event.pk%}" style="text-decoration:none;color:black;">Edit</a></button>
+                </td>
+              </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="view-more-container">
+       <a href="admin_clubs.html">
+        <button class="btn btn-primary view-more-button">View More</button>
+       </a>
+      </div>
+  </div>
+  
+  <div class="event-table-container">
+  <table class="table event-table">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Type</th>
+        <th>Time</th>
+        <th>state</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Iftar Event</td>
+        <td>Social</td>
+        <td>29-03-2024</td>
+        <td>
+          <button class="btn btn-approve">Approve</button>
+          <button class="btn btn-decline">Decline</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Perfusion in Cardiovascular Surgery</td>
+        <td>Science</td>
+        <td>30-03-2024</td>
+        <td>
+          <button class="btn btn-approve">Approve</button>
+          <button class="btn btn-decline">Decline</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Ceramics Workshop</td>
+        <td>Social</td>
+        <td>30-03-2024</td>
+        <td>
+          <button class="btn btn-approve">Approve</button>
+          <button class="btn btn-decline">Decline</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="view-more-container">
+    <a href="admin_events.html">
+     <button class="btn btn-primary view-more-button">View More</button>
+    </a>
+   </div>
+</div>
+<div class="event-table-container">
+    <table class="table event-table">
+      <thead>
+        <tr>
+          <th>Event</th>
+          <th>Type</th>
+          <th>Time</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Iftar Event</td>
+          <td>Social</td>
+          <td>29-03-2024</td>
+          <td>
+            <button class="btn btn-approve">Approve</button>
+            <button class="btn btn-decline">Decline</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Perfusion in Cardiovascular Surgery</td>
+          <td>Science</td>
+          <td>30-03-2024</td>
+          <td>
+            <button class="btn btn-approve">Approve</button>
+            <button class="btn btn-decline">Decline</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Ceramics Workshop</td>
+          <td>Social</td>
+          <td>30-03-2024</td>
+          <td>
+            <button class="btn btn-approve">Approve</button>
+            <button class="btn btn-decline">Decline</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="view-more-container">
+        <a href="admin_activitypost.html">
+         <button class="btn btn-primary view-more-button">View More</button>
+        </a>
+       </div>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  {%endblock%}

@@ -1,0 +1,264 @@
+
+{%extends "navbar.html"%}
+{%load static%}
+
+{%block content%}
+<style>
+
+  /* Viewport'un tamamını kaplayacak şekilde bir konteynır oluşturuyoruz */
+  .view-button-container {
+    display: flex;
+    justify-content: center; /* Yatay olarak ortala */
+    align-items: center; /* Dikey olarak ortala */
+    margin: 0; /* Varsayılan marjları sıfırla */
+  }
+
+  /* Buton stilini ayarlıyoruz */
+  .centered-button {
+    padding: 10px 20px; /* Buton iç boşluğu */
+    background-color: #34568B; /* Buton arka plan rengi */
+    color: white; /* Yazı rengi */
+    border: none; /* Kenarlık kaldır */
+    border-radius: 5px; /* Kenarları hafif yuvarlak yap */
+    cursor: pointer; /* İmleç üzerine geldiğinde el şeklini alsın */
+    font-size: 16px; /* Yazı boyutu */
+    text-transform: uppercase; /* Yazıları büyük harf yap */
+    text-decoration: none; /* Alt çizgiyi kaldır */
+  }
+
+    .orta-yazi {
+    text-align: center; /* Metni ortalar */
+    width: 100%; /* Tam genişlik */
+    margin-top: 20px; /* Üstten boşluk */
+    font-size: 40px; /* Yazı boyutu */
+    font-weight: bold; /* Yazı kalınlığı */
+  }
+
+
+  .icerik-kapsayici {
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8; /* Arka plan rengini görseldeki gibi ayarlayabilirsiniz */
+    padding: 20px; /* İçerik aralığını ayarlamak için */
+    box-sizing: border-box; /* Padding'leri genişlik hesaplamasına dahil etmek için */
+  }
+  .metin-icerik {
+    flex: 1; /* Metnin esnek olmasını sağlar */
+    padding-right: 20px; /* Metin ile resim arasında boşluk */
+  }
+  .resim-icerik {
+    flex-basis: 50%; /* Resmin kapladığı genişliği sabit bir yüzdeyle belirleyebilirsiniz */
+  }
+  .resim-icerik img {
+    width: 100%; /* Resmi div'in genişliğine sığdırmak için */
+    height: auto; /* Resmin orijinal oranlarını korumak için */
+  }
+  
+ .container{
+   margin-bottom: 80px;
+   margin-top: 60px;
+  }
+
+                /* Buton için CSS Stilleri */
+.button-container {
+    display: flex;
+    justify-content: center; /* Butonu ortalar */
+    padding: 2rem; /* Çevresinde boşluk bırakır */
+}
+
+.fancy-button {
+    padding: 1rem 2rem; /* Buton içi boşluk */
+    background-color: #007bff; /* Mavi arkaplan rengi */
+    color: white; /* Metin rengi beyaz */
+    text-transform: uppercase; /* Metin büyük harfler */
+    text-decoration: none; /* Metin altı çizgi kaldırır */
+    border-radius: 5px; /* Kenarları yuvarlaklaştırır */
+    transition: background-color 0.3s ease; /* Arkaplan rengi geçişi yumuşatır */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+    display: inline-block; /* Düzgün görünüm sağlar */
+}
+
+.fancy-button:hover {
+    background-color: #0056b3; /* Hover durumunda arkaplan rengi */
+    text-decoration: none; /* Hover durumunda metin altı çizgi kaldırır */
+    color: white; /* Hover durumunda metin rengi beyaz */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Hover durumunda gölge efekti */
+}
+
+
+    </style>
+
+<div class="container" >
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{%static '/images/image1.png'%}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{%static '/images/headline.jpg'%}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{%static '/images/image1.png'%}" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+    
+        </button>
+
+        
+      </div>
+
+  <div class="icerik-kapsayici">
+  <div class="metin-icerik">
+    <h1>Students Club</h1>
+    <p>
+      Bu kulüpler Red Sea Üniversitesi öğrencileri tarafından yönetilmektedir, böylece hem bir organizatör
+      hem de bir katılımcı olabilirsiniz. Kulüpler, organist yarışmaları, etkinlikler ve mükemmel
+      ağ oluşturma fırsatları sunan aktiviteler düzenler ve öğrencilerle tanışma fırsatı sunar.
+    </p>
+  </div>
+  <div class="resim-icerik">
+    <img src="{%static 'brookeCagleJbwcenOuRcgUnsplash11.png'%}" alt="Öğrenci Kulüpleri Etkinliği">
+  </div>
+  </div>
+  <hr>
+  <div class="orta-yazi">
+    Upcoming Activities
+  </div>
+
+  <div class="row my-5 ">
+    <div class="col-sm">
+      {%for event in events%}
+      <div class="card">
+          <img src="{%static 'images/etkinlik3.png'%}" class="card-img-top" alt="...">
+          <div class="card-body">
+              <div class="card-event-date">
+                  <span class="card-icon">🗓️</span>27 Mar 2024
+              </div>
+              <h5 class="card-title">{{event.event_name}}</h5>
+              <p class="card-text">{{event.event_hall}}</p>
+              <p class="card-time">16:00Pm</p>
+              <div class="button-container">
+                  <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+              </div>
+
+          </div>
+          {%endfor%}
+      </div>
+  </div>
+  <div class="col-sm">
+    <div class="card">
+        <img src="{%static 'images/etkinlik2.png'%}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <div class="card-event-date">
+                <span class="card-icon">🗓️</span>27 Mar 2024
+            </div>
+            <h5 class="card-title">Iftar Program</h5>
+            <p class="card-text">Red Sea University Central Campus</p>
+            <p class="card-time">16:00Pm</p>
+            <div class="button-container">
+                <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col-sm">
+  <div class="card">
+      <img src="{%static '/images/etkinlik1.png'%}" class="card-img-top" alt="...">
+      <div class="card-body">
+          <div class="card-event-date">
+              <span class="card-icon">🗓️</span>27 Mar 2024
+          </div>
+          <h5 class="card-title">Iftar Program</h5>
+          <p class="card-text">Red Sea University Central Campus</p>
+          <p class="card-time">16:00Pm</p>
+          <div class="button-container">
+              <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+          </div>
+
+      </div>
+  </div>
+</div>
+</div>
+
+<div class="view-button-container">
+  <a href="events.html" class="centered-button">View More</a>
+</div>
+<hr>
+<div class="orta-yazi">
+  Clubs
+  
+  <h3>Explore Our students Clubs For Fun And exciting experiences</h3>
+</div>
+
+<div class="card-container">
+  <div class="card">
+    <img src="{%static '/images/ellipse86.png'%}" alt="Codyle Logo">
+    <h3>Codyle</h3>
+  </div>
+  <div class="card">
+    <img src="{%static '/images/ellipse87.png'%}" alt="AI Club Logo">
+    <h3>AI Club</h3>
+  </div>
+  <div class="card">
+    <img src="{%static '/images/ellipse89.png'%}" alt="Art Club Logo">
+    <h3>Art Club</h3>
+  </div>
+  <div class="card">
+    <img src="{%static '/images/ellipse90.png'%}" alt="Codyle Logo">
+    <h3>Codyle</h3>
+  </div>
+  <div class="card">
+    <img src="{%static '/images/ellipse91.png'%}" alt="AI Club Logo">
+    <h3>AI Club</h3>
+  </div>
+  <div class="card">
+    <img src="{%static '/images/ellipse92.png'%}" alt="Art Club Logo">
+    <h3>Art Club</h3>
+  </div>
+</div>
+
+
+</div> 
+
+    
+
+
+      
+
+
+
+
+      <div class="footer">
+        <div class="logo-container">
+            <img src="{%static '/images/rectangle11.png'%}" alt="Red Sea University Logo">
+            <p>T.C Red Sea University</p>
+        </div>
+        <div class="contact-info">
+            <h3>Contact</h3>
+            <p>Phone: +905523571582</p>
+            <p>Email: Redseauniv@gmail.com</p>
+            <p>Address: 2521 Barrboro Dr. Assosk, VN 87100 SESB</p>
+        </div>
+        <div class="useful-links">
+            <h3>Useful Links</h3>
+            <ul>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="clubs.html">Clubs</a></li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+        </div>
+    </div>
+    {%endblock%}

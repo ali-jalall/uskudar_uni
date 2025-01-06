@@ -1,0 +1,345 @@
+{%extends "navbar.html"%}
+{%load static%}
+
+
+{%block content%}
+  <style>
+
+body {
+    background-color: #f4f4f4; /* Arka plan rengi */
+    font-family: 'Arial', sans-serif; /* Yazı tipi */
+  }
+  
+/* Arama çubuğu ve kategori seçici stilini ayarla */
+.search-bar {
+    display: flex;
+    align-items: center; /* İçeriği dikey olarak hizala */
+    background: #FFFFFF; /* Arka plan beyaz */
+    border-radius: 20px; /* Kenarları yuvarlak yap */
+    padding: 8px 16px; /* İçerden boşluk ver */
+    margin-bottom: 20px; /* Altından boşluk ver */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+  }
+  
+  /* Arama input ve seçici stilini ayarla */
+  .search-input, .category-select {
+    border: none; /* Kenar çizgilerini kaldır */
+    outline: none; /* Focus kenarlıklarını kaldır */
+    margin-right: 8px; /* Sağdaki öğelerle arasında boşluk bırak */
+  }
+  
+  /* Arama input'una genişletilmiş bir görünüm ver */
+  .search-input {
+    flex-grow: 1; /* Arama kutusunu genişlet */
+    border-radius: 20px; /* Kenarları yuvarlak yap */
+  }
+  
+  /* Seçici stilini ayarla */
+  .category-select {
+    background: transparent; /* Arka planı şeffaf yap */
+    padding: 5px 10px; /* İçerden boşluk ver */
+    cursor: pointer; /* İmleç el şeklini alsın */
+  }
+  
+  /* Buton stilini ayarla */
+  .search-button {
+    background-color: #007bff; /* Buton mavi renk */
+    color: white;
+    border: none;
+    border-radius: 20px; /* Kenarları yuvarlak yap */
+    padding: 10px 20px; /* İçerden boşluk ver */
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+  }
+  
+  .search-button:hover {
+    background-color: #0056b3; /* Butona hover efekti */
+  }
+  
+  /* Kategori seçici için Bootstrap sınıfını kullanabilirsiniz */
+  .category-select {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+  
+  /* Responsive düzenlemeler */
+  @media (max-width: 768px) {
+    .search-bar {
+      flex-direction: column; /* Küçük ekranlarda yığınsal düzen */
+      padding: 8px;
+    }
+  
+    .search-input,
+    .category-select,
+    .search-button {
+      width: 100%; /* Tam genişlik */
+      margin-bottom: 8px; /* Alt öğeler arası boşluk */
+    }
+  
+    .search-button {
+      width: auto; /* Buton genişliği otomatik olsun */
+    }
+  }
+  
+  
+  /* Kulüpler başlığı ve açıklama stilini ayarla */
+  .text-center h2 {
+    color: #333;
+    margin-bottom: 4px;
+  }
+  
+  .text-center p {
+    color: #666;
+    font-size: 16px;
+  }
+  
+  /* Kart stilini ayarla */
+  .card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Gölge efekti */
+    margin-bottom: 20px; /* Alt kartlar arası boşluk */
+    border-radius: 8px; /* Yuvarlatılmış köşeler */
+  }
+  
+  .card-img-top {
+    border-top-left-radius: 8px; /* Resim köşelerini yuvarla */
+    border-top-right-radius: 8px;
+  }
+  
+  .card-title {
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .card-text,
+  .card-time {
+    color: #666;
+    font-size: 14px;
+  }
+  
+  /* Buton stilini ayarla */
+  .fancy-button {
+    background-color: #007bff; /* Bootstrap mavi buton rengi */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px; /* Yuvarlatılmış köşeler */
+    text-decoration: none; /* Altı çizili link görünümünü kaldır */
+  }
+  
+  .fancy-button:hover {
+    background-color: #0056b3; /* Butona hover efekti */
+  }
+  .modal-dialog {
+    display: flex;
+    align-items: center; /* Dikey olarak ortala */
+    min-height: calc(100vh - 60px); /* Ekranın tam boyundan 60px çıkar (modalın üst ve alt boşlukları için) */
+  }
+  
+  /* Küçük cihazlarda modalı ekrana sığdırmak için */
+  @media (max-width: 576px) {
+    .modal-dialog {
+      min-height: 100vh; /* Ekranın tam boyu */
+      margin: 0;
+    }
+    .modal-content {
+      min-height: calc(100vh - 20px); /* 10px üst ve alt padding */
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+  
+  
+  </style>
+
+  <div class="container mt-5">
+    <!-- Arama Çubuğu ve Kategori Seçici -->
+    <div class="row">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-primary" type="button">Search</button>
+      </div>
+      <div class="col">
+        <select class="form-control">
+            <option selected>Select Category</option>
+            <option value="software_engineering">Software Engineering</option>
+            <option value="data_science">Data Science</option>
+            <option value="cyber_security">Cyber Security</option>
+          <!-- Kategori seçeneklerini buraya ekleyin -->
+        </select>
+      </div>
+    </div>
+
+    <!-- Kulüpler Başlığı ve Açıklaması -->
+    <div class="text-center my-5">
+      <h2>Clubs</h2>
+      <p>Explore Our Student Clubs for fun and exciting experiences</p>
+    </div>
+
+    <!-- Kartlar -->
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card" data-toggle="modal" data-target="#clubModal">
+          <img src="{%static '/images/ellipse86.png'%}" class="card-img-top" alt="Codyle">
+          <div class="card-body">
+            <h5 class="card-title">Codyle</h5>
+            <!-- Kart içeriği -->
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="col-md-4">
+        <div class="card" data-toggle="modal" data-target="#clubModal">
+          <img src="{%static '/images/ellipse87.png'%}" class="card-img-top" alt="AI Club">
+          <div class="card-body">
+            <h5 class="card-title">AI Club</h5>
+            <!-- Kart içeriği -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card" data-toggle="modal" data-target="#clubModal">
+          <img src="{%static '/images/ellipse89.png'%}" class="card-img-top" alt="Art Club">
+          <div class="card-body">
+            <h5 class="card-title">Art Club</h5>
+            <!-- Kart içeriği -->
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card" data-toggle="modal" data-target="#clubModal">
+          <img src="{%static '/images/ellipse90.png'%}" class="card-img-top" alt="Codyle">
+          <div class="card-body">
+            <h5 class="card-title">Codyle</h5>
+            <!-- Kart içeriği -->
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="col-md-4">
+        <div class="card" data-toggle="modal" data-target="#clubModal">
+          <img src="{%static '/images/ellipse91.png'%}" class="card-img-top" alt="AI Club">
+          <div class="card-body">
+            <h5 class="card-title">AI Club</h5>
+            <!-- Kart içeriği -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card" data-toggle="modal" data-target="#clubModal">
+          <img src="{%static '/images/ellipse92.png'%}" class="card-img-top" alt="Art Club">
+          <div class="card-body">
+            <h5 class="card-title">Art Club</h5>
+            <!-- Kart içeriği -->
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card" data-toggle="modal" data-target="#clubModal">
+          <img src="{%static '/images/ellipse93.png'%}" class="card-img-top" alt="Codyle">
+          <div class="card-body">
+            <h5 class="card-title">Codyle</h5>
+            <!-- Kart içeriği -->
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="col-md-4">
+        <div class="card" data-toggle="modal" data-target="#clubModal">
+          <img src="{%static '/images/ellipse94.png'%}" class="card-img-top" alt="AI Club">
+          <div class="card-body">
+            <h5 class="card-title">AI Club</h5>
+            <!-- Kart içeriği -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card" data-toggle="modal" data-target="#clubModal">
+          <img src="{%static '/images/ellipse86.png'%}" class="card-img-top" alt="Art Club">
+          <div class="card-body">
+            <h5 class="card-title">Art Club</h5>
+            <!-- Kart içeriği -->
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card" data-toggle="modal" data-target="#clubModal">
+          <img src="{%static '/images/ellipse87.png'%}" class="card-img-top" alt="Codyle">
+          <div class="card-body">
+            <h5 class="card-title">Codyle</h5>
+            <!-- Kart içeriği -->
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="col-md-4">
+        <div class="card" data-toggle="modal" data-target="#clubModal">
+          <img src="{%static '/images/ellipse89.png'%}" class="card-img-top" alt="AI Club">
+          <div class="card-body">
+            <h5 class="card-title">AI Club</h5>
+            <!-- Kart içeriği -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card" data-toggle="modal" data-target="#clubModal">
+          <img src="{%static '/images/ellipse90.png'%}" class="card-img-top" alt="Art Club">
+          <div class="card-body">
+            <h5 class="card-title">Art Club</h5>
+            <!-- Kart içeriği -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="clubModal" tabindex="-1" aria-labelledby="clubModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="clubModalLabel">CODYLE ÖĞRENCİ KULÜBÜ</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Modal içeriği -->
+          <div>
+            <h6>President</h6>
+            <p>Abdinasir Hussein ALI</p>
+          </div>
+          <div>
+            <h6>Vice president</h6>
+            <p>Mohammad BARAKAT</p>
+          </div>
+          <div>
+            <h6>Email</h6>
+            <p>codylegencikulubu@st.redsea.edu.tr</p>
+            <div id="successMessage" class="alert alert-success" role="alert" style="display:none;">
+              <strong>Success!</strong> You have registered successfully.
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" onclick="registerStudent()">Register</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+{%endblock%}

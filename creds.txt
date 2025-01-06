@@ -1,0 +1,11 @@
+SKS Admin
+email=ali@admin.com
+password=securepassword
+
+Club Manager
+email=ali2@admin.com
+password=securepassword
+
+Student
+email=ajmabilal@gmail.com
+password=1Q2W3E4R5T6y

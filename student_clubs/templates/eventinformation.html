@@ -1,0 +1,140 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Page</title>
+<link rel="stylesheet" href="{%static '/css/footer.css'%}">
+<link rel="stylesheet" href="{%static '/css/eventinfo.css'%}">
+<link rel="stylesheet" href="{%static '/css/cardconteynir.css'%}">
+<link rel="stylesheet" href="{%static '/css/button.css'%}">
+<style>
+    .orta-yazi {
+    text-align: center; /* Metni ortalar */
+    width: 100%; /* Tam genişlik */
+    margin-top: 20px; /* Üstten boşluk */
+    font-size: 40px; /* Yazı boyutu */
+    font-weight: bold; /* Yazı kalınlığı */
+    color: cornflowerblue;
+  }
+</style>
+</head>
+<body>
+    <div class="event-container mt-5">
+        <div class="event-image">
+          <!-- Image would be placed here, make sure to replace 'path_to_your_event_image.jpg' with your actual image path -->
+          <img src="{%static '/images/modernMusicEventPosterDesignTemplate84E8234Cb987682B79142B4839886E47Screen.jpeg'%}" alt="Music Event Poster">
+        </div>
+        <div class="event-info">
+          <h2>Information:</h2>
+          <p><strong>Date</strong><br>Monday, 15 October 2022 16:00</p>
+          <p><strong>Location</strong><br>Redsea University Central Campus</p>
+          <button onclick="location.href='your_map_link.html'">Show on map</button>
+        </div>
+      </div>
+
+      <!-- Önceki HTML yapınızın devamı... -->
+<div class="event-description">
+    Lorem ipsum dolor sit amet. Et iusto galisum sed voluptatem enim At voluptates iste aut velit dolore et itaque atque ut animi galisum! Et vero libero a Quis aspernatur ab deleniti quaerat eum voluptatem vero sit modi cupiditate ea ullam laboriosam?
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, mollitia beatae ratione possimus perspiciatis consectetur inventore dolorum minus tempora aliquam? Magnam perspiciatis doloribus sed distinctio ex reprehenderit voluptatibus minus aut.
+  </div>
+  
+<hr>
+  <div class="orta-yazi">
+    SIMILAR ACTIVITIES
+    
+  </div>
+
+  <div class="row my-5 ">
+    <div class="col-sm">
+      <div class="card">
+          <img src="{%static '/images/etkinlik3.png'%}" class="card-img-top" alt="...">
+          <div class="card-body">
+              <div class="card-event-date">
+                  <span class="card-icon">🗓️</span>27 Mar 2024
+              </div>
+              <h5 class="card-title">Iftar Program</h5>
+              <p class="card-text">Red Sea University Central Campus</p>
+              <p class="card-time">16:00Pm</p>
+              <div class="button-container">
+                  <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+              </div>
+
+          </div>
+      </div>
+  </div>
+  <div class="col-sm">
+    <div class="card">
+        <img src="{%static '/images/etkinlik2.png'%}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <div class="card-event-date">
+                <span class="card-icon">🗓️</span>27 Mar 2024
+            </div>
+            <h5 class="card-title">Iftar Program</h5>
+            <p class="card-text">Red Sea University Central Campus</p>
+            <p class="card-time">16:00Pm</p>
+            <div class="button-container">
+                <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col-sm">
+  <div class="card">
+      <img src="{%static '/images/etkinlik1.png'%}" class="card-img-top" alt="...">
+      <div class="card-body">
+          <div class="card-event-date">
+              <span class="card-icon">🗓️</span>27 Mar 2024
+          </div>
+          <h5 class="card-title">Iftar Program</h5>
+          <p class="card-text">Red Sea University Central Campus</p>
+          <p class="card-time">16:00Pm</p>
+          <div class="button-container">
+              <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+          </div>
+
+      </div>
+  </div>
+</div>
+</div>
+
+<div class="footer">
+    <div class="logo-container">
+        <img src="{%static '/images/rectangle11.png'%}" alt="Red Sea University Logo">
+        <p>T.C Red Sea University</p>
+    </div>
+    <div class="contact-info">
+        <h3>Contact</h3>
+        <p>Phone: +905523571582</p>
+        <p>Email: Redseauniv@gmail.com</p>
+        <p>Address: 2521 Barrboro Dr. Assosk, VN 87100 SESB</p>
+    </div>
+    <div class="useful-links">
+        <h3>Useful Links</h3>
+        <ul>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="clubs.html">Clubs</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </div>
+</div>
+        
+        
+
+
+
+  <div id="navbar-placeholder"></div>
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+      fetch('navbar.html')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('navbar-placeholder').innerHTML = data;
+          });
+  });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+.table-container {
+      margin-top: 100px; /* NavBar yüksekliği + istediğiniz ek boşluk */
+      margin-left: 300px; /* SideBar genişliğini artırarak kartları sağa kaydır */
+      padding: 20px;
+
+}
+
+
+/* Tablo stillemesi */
+.table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.table thead th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+/* Düğme stillemesi */
+.btn {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+    .dashboard-container {
+      display: flex;
+      justify-content: flex-start; /* Kartları sola yasla */
+      flex-wrap: wrap;
+      margin-top: 100px; /* Navbar yüksekliği ve ekstra boşluk */
+      margin-left: 150px; /* Kartları biraz daha sağa kaydır */
+    }
+    .main-content {
+      margin-top: 100px; /* NavBar yüksekliği + istediğiniz ek boşluk */
+      margin-left: 300px; /* SideBar genişliğini artırarak kartları sağa kaydır */
+      padding: 20px;
+    }
+    /* Ana içerik kartları için stil */
+    .dashboard-card {
+      background-color: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      margin: 20px;
+    }
+
+    .dashboard-card h3 {
+      color: #24305E;
+      margin-bottom: 10px;
+    }
+
+    .dashboard-card .number {
+      color: #24305E;
+      font-size: 36px;
+      font-weight: bold;
+    }
+
+    .dashboard-card i {
+      color: #24305E;
+      margin: 10px;
+    }
+
+    .dashboard-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 20px; /* Navbar yüksekliği ve ekstra boşluk */
+    }
+    .main-content {
+  margin-top: 100px; /* NavBar yüksekliği + istediğiniz ek boşluk */
+  margin-left: 250px; /* SideBar genişliği */
+  padding: 20px;
+}
+/* View More Butonu için konteyner */
+.view-more-container {
+  text-align: center; /* Butonu ortalar */
+  margin-top: 20px; /* Tablo ile arasında boşluk bırakır */
+}
+
+/* Buton stillemesi (Bootstrap ile bazı stiller zaten gelir) */
+.view-more-button {
+  padding: 10px 20px; /* Butonun boyutunu ayarlar */
+  font-size: 16px; /* Font boyutunu ayarlar */
+  color: white; /* Yazı rengini ayarlar */
+  background-color: #007bff; /* Butonun arka plan rengini ayarlar */
+  border: none; /* Kenarlık kaldırılır */
+  border-radius: 5px; /* Kenarları yuvarlaklaştırır */
+  cursor: pointer; /* Üzerine gelindiğinde el simgesi çıkar */
+}
+
+/* Opsiyonel: Butona hover efekti ekleyin */
+.view-more-button:hover {
+  background-color: #0056b3; /* Butonun üzerine gelindiğinde renk değişimi */
+}
+
+.event-table-container {
+  margin-top: 100px; /* NavBar yüksekliği + istediğiniz ek boşluk */
+  margin-left: 300px; /* SideBar genişliğini artırarak kartları sağa kaydır */
+  padding: 20px;
+}
+
+.event-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.event-table th,
+.event-table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd; /* Satırlar arası ince bir çizgi */
+}
+
+.event-table thead {
+  background-color: #f2f2f2; /* Başlık arka plan rengi */
+}
+
+.btn {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-approve {
+  background-color: #4CAF50; /* Yeşil arka plan */
+  color: white;
+}
+
+.btn-decline {
+  background-color: #f44336; /* Kırmızı arka plan */
+  color: white;
+}
+
+/* Butonlara hafif yuvarlak köşeler */
+.btn-approve,
+.btn-decline {
+  border-radius: 4px;
+}
+
+/* Buton hover efektleri */
+.btn-approve:hover {
+  background-color: #46a049;
+}
+
+.btn-decline:hover {
+  background-color: #d32f2f;
+}
+
+/* Responsive düzenlemeler */
+@media screen and (max-width: 768px) {
+  .event-table-container {
+    overflow-x: auto; /* Yatay kaydırma çubuğu ekler */
+  }
+
+  .btn {
+    padding: 5px;
+    font-size: 12px;
+  }
+}
