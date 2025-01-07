@@ -4,6 +4,7 @@ from student_clubs.views import MyLogin, StudentDash, EventCreateView, EventList
 from django.contrib.auth.views import LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
+from student_clubs.views import CustomLogoutView  # Import your custom view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,7 +27,7 @@ urlpatterns = [
     path('student/clubs/', StudentClubs.as_view(), name="student_clubs"),
     path('student/event', StudentEvent.as_view(), name="student_event"),
     path('Student/CreateAccount', sign_up_student ,name='signup'),
-    path('logout/',LogoutView.as_view(next_page='homepage'),name='logout')
+    path('logout/', CustomLogoutView.as_view(), name='logout'),
 ]
 
 

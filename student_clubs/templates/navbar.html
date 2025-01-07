@@ -36,10 +36,13 @@
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="{%url 'about'%}">About Us</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{%url 'logout'%}">Logout</a>
-            </li>
-            
+            <!-- <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'logout' %}">Logout</a>
+            </li> -->
+            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-link nav-link">Logout</button>
+          </form>
           </ul>
 
         </div>

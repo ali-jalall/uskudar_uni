@@ -9,7 +9,22 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.views.generic import  DetailView , ListView , CreateView , DeleteView , UpdateView
 from .forms import RegisterForm
 from django.shortcuts import redirect
+from django.contrib.auth.views import LogoutView
+from django.http import HttpResponseRedirect
 
+class CustomLogoutView(LogoutView):
+    next_page = '/'  # This ensures redirection after logout
+
+    def dispatch(self, request, *args, **kwargs):
+        # Clear specific cookies
+        response = super().dispatch(request, *args, **kwargs)
+        response.delete_cookie('csrftoken')  # Replace with the actual cookie name you want to clear
+        response.delete_cookie('messages')    # Delete other cookies as needed
+        response.delete_cookie('sessionid')    # Delete other cookies as needed
+        return response
+    
+    def get_next_page(self):
+        return self.next_page
 
 class MyLogin(LoginView):
     redirect_authenticated_user = True
