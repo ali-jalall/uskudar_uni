@@ -1,82 +1,88 @@
-{%extends "admin_navbar.html"%}
-{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="natification.js"></script>
 
-
-{%block content%}
-<style>
+    <style>
       
-  .event-table-container {
-      margin-top: 100px; /* NavBar yüksekliği + istediğiniz ek boşluk */
-        margin-left: 300px; /* SideBar genişliğini artırarak kartları sağa kaydır */
-        padding: 20px;
-  
-    font-family: Arial, sans-serif;
-  }
-  
-  .event-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hafif bir gölge efekti */
-  }
-  
-  .event-table th,
-  .event-table td {
-    text-align: left;
-    padding: 16px; /* Daha geniş padding */
-    border-bottom: 1px solid #ccc; /* Daha hafif renkli çizgi */
-  }
-  
-  .event-table thead {
-    background-color: #f9f9f9; /* Daha açık bir başlık arka plan rengi */
-    color: #333; /* Başlık metin rengi */
-    border-bottom: 2px solid #ccc; /* Daha kalın alt çizgi */
-  }
-  
-  .btn {
-    padding: 8px 15px; /* Düğme boyutları */
-    border: 1px solid #ccc; /* Düğme kenar çizgisi */
-    background-color: white; /* Düğme arka plan rengi */
-    color: #555; /* Düğme metin rengi */
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px; /* Düğme metin boyutu */
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px; /* Düğme köşe yuvarlaklığı */
-    transition: all 0.3s ease; /* Pürüzsüz geçiş efekti */
-  }
-  
-  .btn:hover {
-    background-color: #f5f5f5; /* Üzerine gelince arka plan rengi */
-  }
-  
-  /* İsteğe bağlı olarak Approve ve Decline düğmeleri için farklı renkler */
-  .approve {
-    border-color: #4CAF50; /* Yeşil kenar çizgisi */
-    color: #4CAF50; /* Yeşil metin */
-  }
-  
-  .decline {
-    border-color: #f44336; /* Kırmızı kenar çizgisi */
-    color: #f44336; /* Kırmızı metin */
-  }
-  
-  .approve:hover {
-    border-color: #45a049; /* Üzerine gelince kenar çizgisi */
-    color: white; /* Üzerine gelince metin */
-    background-color: #45a049; /* Üzerine gelince arka plan */
-  }
-  
-  .decline:hover {
-    border-color: #d32f2f; /* Üzerine gelince kenar çizgisi */
-    color: white; /* Üzerine gelince metin */
-    background-color: #d32f2f; /* Üzerine gelince arka plan */
-  }
-  
-  
-      </style>
+.event-table-container {
+    margin-top: 100px; /* NavBar yüksekliği + istediğiniz ek boşluk */
+      margin-left: 300px; /* SideBar genişliğini artırarak kartları sağa kaydır */
+      padding: 20px;
+
+  font-family: Arial, sans-serif;
+}
+
+.event-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hafif bir gölge efekti */
+}
+
+.event-table th,
+.event-table td {
+  text-align: left;
+  padding: 16px; /* Daha geniş padding */
+  border-bottom: 1px solid #ccc; /* Daha hafif renkli çizgi */
+}
+
+.event-table thead {
+  background-color: #f9f9f9; /* Daha açık bir başlık arka plan rengi */
+  color: #333; /* Başlık metin rengi */
+  border-bottom: 2px solid #ccc; /* Daha kalın alt çizgi */
+}
+
+.btn {
+  padding: 8px 15px; /* Düğme boyutları */
+  border: 1px solid #ccc; /* Düğme kenar çizgisi */
+  background-color: white; /* Düğme arka plan rengi */
+  color: #555; /* Düğme metin rengi */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px; /* Düğme metin boyutu */
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px; /* Düğme köşe yuvarlaklığı */
+  transition: all 0.3s ease; /* Pürüzsüz geçiş efekti */
+}
+
+.btn:hover {
+  background-color: #f5f5f5; /* Üzerine gelince arka plan rengi */
+}
+
+/* İsteğe bağlı olarak Approve ve Decline düğmeleri için farklı renkler */
+.approve {
+  border-color: #4CAF50; /* Yeşil kenar çizgisi */
+  color: #4CAF50; /* Yeşil metin */
+}
+
+.decline {
+  border-color: #f44336; /* Kırmızı kenar çizgisi */
+  color: #f44336; /* Kırmızı metin */
+}
+
+.approve:hover {
+  border-color: #45a049; /* Üzerine gelince kenar çizgisi */
+  color: white; /* Üzerine gelince metin */
+  background-color: #45a049; /* Üzerine gelince arka plan */
+}
+
+.decline:hover {
+  border-color: #d32f2f; /* Üzerine gelince kenar çizgisi */
+  color: white; /* Üzerine gelince metin */
+  background-color: #d32f2f; /* Üzerine gelince arka plan */
+}
+
+
+    </style>
+</head>
+<body>
+    
     <div class="event-table-container">
         <table class="event-table">
           <thead>
@@ -88,7 +94,7 @@
             </tr>
           </thead>
           <tbody>
-           
+            <!-- Tablo satırları JavaScript ile doldurulacak -->
           </tbody>
         </table>
       </div>
@@ -130,10 +136,18 @@
 
 
     <div id="navbar-placeholder"></div>
-    
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('admin_navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            });
+    });
+    </script>
+  <!-- Bootstrap JS ve bağımlılıkları (opsiyonel) -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="{% static '/js/natification.js'}"></script>
-
-{%endblock%}
+</body>
+</html>

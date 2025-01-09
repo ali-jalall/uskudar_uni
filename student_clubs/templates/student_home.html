@@ -1,9 +1,12 @@
-
-{%extends "navbar.html"%}
-{%load static%}
-
-{%block content%}
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/cardconteynir.css">
+    <style>
 
   /* Viewport'un tamamını kaplayacak şekilde bir konteynır oluşturuyoruz */
   .view-button-container {
@@ -87,6 +90,18 @@
 
 
     </style>
+</head>
+<>
+    <div id="navbar-placeholder"></div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            });
+    });
+    </script>
 
 <div class="container" >
     <div id="carouselExampleIndicators" class="carousel slide">
@@ -97,13 +112,13 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="{%static '/images/image1.png'%}" class="d-block w-100" alt="...">
+            <img src="/static/images/student_home_page.png" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="{%static '/images/headline.jpg'%}" class="d-block w-100" alt="...">
+            <img src="/static/images/student3.png" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="{%static '/images/image1.png'%}" class="d-block w-100" alt="...">
+            <img src="/static/images/uskudar_uni.png" class="d-block w-100" alt="...">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -123,13 +138,11 @@
   <div class="metin-icerik">
     <h1>Students Club</h1>
     <p>
-      Bu kulüpler Red Sea Üniversitesi öğrencileri tarafından yönetilmektedir, böylece hem bir organizatör
-      hem de bir katılımcı olabilirsiniz. Kulüpler, organist yarışmaları, etkinlikler ve mükemmel
-      ağ oluşturma fırsatları sunan aktiviteler düzenler ve öğrencilerle tanışma fırsatı sunar.
+      These clubs are managed by Uskudar University students, allowing you to participate both as an organizer and as a participant. The clubs organize activities that offer organist competitions, events, excellent networking opportunities, and the chance to meet other students.
     </p>
   </div>
   <div class="resim-icerik">
-    <img src="{%static 'brookeCagleJbwcenOuRcgUnsplash11.png'%}" alt="Öğrenci Kulüpleri Etkinliği">
+    <img src="/static/images/brookeCagleJbwcenOuRcgUnsplash11.png" alt="Öğrenci Kulüpleri Etkinliği">
   </div>
   </div>
   <hr>
@@ -139,34 +152,32 @@
 
   <div class="row my-5 ">
     <div class="col-sm">
-      {%for event in events%}
       <div class="card">
-          <img src="{%static 'images/etkinlik3.png'%}" class="card-img-top" alt="...">
+          <img src="/static/images/etkinlik3.png" class="card-img-top" alt="...">
           <div class="card-body">
               <div class="card-event-date">
-                  <span class="card-icon">🗓️</span>27 Mar 2024
+                  <span class="card-icon">🗓️</span>7 Feb 2025
               </div>
-              <h5 class="card-title">{{event.event_name}}</h5>
-              <p class="card-text">{{event.event_hall}}</p>
-              <p class="card-time">16:00Pm</p>
+              <h5 class="card-title">Medical Skills Workshop</h5>
+              <p class="card-text">Faculty of Medicine NP Campus</p>
+              <p class="card-time">14:00</p>
               <div class="button-container">
                   <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
               </div>
 
           </div>
-          {%endfor%}
       </div>
   </div>
   <div class="col-sm">
     <div class="card">
-        <img src="{%static 'images/etkinlik2.png'%}" class="card-img-top" alt="...">
+        <img src="/static/images/etkinlik2.png" class="card-img-top" alt="...">
         <div class="card-body">
             <div class="card-event-date">
-                <span class="card-icon">🗓️</span>27 Mar 2024
+                <span class="card-icon">🗓️</span>2 Mar 2025
             </div>
             <h5 class="card-title">Iftar Program</h5>
-            <p class="card-text">Red Sea University Central Campus</p>
-            <p class="card-time">16:00Pm</p>
+            <p class="card-text">Uskudar University Main Campus</p>
+            <p class="card-time">18:00</p>
             <div class="button-container">
                 <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
             </div>
@@ -176,14 +187,14 @@
 </div>
 <div class="col-sm">
   <div class="card">
-      <img src="{%static '/images/etkinlik1.png'%}" class="card-img-top" alt="...">
+      <img src="/static/images/etkinlik1.png" class="card-img-top" alt="...">
       <div class="card-body">
           <div class="card-event-date">
-              <span class="card-icon">🗓️</span>27 Mar 2024
+              <span class="card-icon">🗓️</span>6 Jan 2025
           </div>
-          <h5 class="card-title">Iftar Program</h5>
-          <p class="card-text">Red Sea University Central Campus</p>
-          <p class="card-time">16:00Pm</p>
+          <h5 class="card-title">Cookie For Movie Event</h5>
+          <p class="card-text">Uskudar University Carsi Campus</p>
+          <p class="card-time">16:00</p>
           <div class="button-container">
               <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
           </div>
@@ -205,27 +216,27 @@
 
 <div class="card-container">
   <div class="card">
-    <img src="{%static '/images/ellipse86.png'%}" alt="Codyle Logo">
+    <img src="/static/images/ellipse86.png" alt="Codyle Logo">
     <h3>Codyle</h3>
   </div>
   <div class="card">
-    <img src="{%static '/images/ellipse87.png'%}" alt="AI Club Logo">
+    <img src="/static/images/ellipse87.png" alt="AI Club Logo">
     <h3>AI Club</h3>
   </div>
   <div class="card">
-    <img src="{%static '/images/ellipse89.png'%}" alt="Art Club Logo">
+    <img src="/static/images/ellipse89.png" alt="Art Club Logo">
     <h3>Art Club</h3>
   </div>
   <div class="card">
-    <img src="{%static '/images/ellipse90.png'%}" alt="Codyle Logo">
+    <img src="/static/images/ellipse90.png" alt="Codyle Logo">
     <h3>Codyle</h3>
   </div>
   <div class="card">
-    <img src="{%static '/images/ellipse91.png'%}" alt="AI Club Logo">
+    <img src="/static/images/ellipse91.png" alt="AI Club Logo">
     <h3>AI Club</h3>
   </div>
   <div class="card">
-    <img src="{%static '/images/ellipse92.png'%}" alt="Art Club Logo">
+    <img src="/static/images/ellipse92.png" alt="Art Club Logo">
     <h3>Art Club</h3>
   </div>
 </div>
@@ -241,24 +252,36 @@
 
 
 
-      <div class="footer">
-        <div class="logo-container">
-            <img src="{%static '/images/rectangle11.png'%}" alt="Red Sea University Logo">
-            <p>T.C Red Sea University</p>
-        </div>
-        <div class="contact-info">
-            <h3>Contact</h3>
-            <p>Phone: +905523571582</p>
-            <p>Email: Redseauniv@gmail.com</p>
-            <p>Address: 2521 Barrboro Dr. Assosk, VN 87100 SESB</p>
-        </div>
-        <div class="useful-links">
-            <h3>Useful Links</h3>
-            <ul>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="clubs.html">Clubs</a></li>
-                <li><a href="about.html">About Us</a></li>
-            </ul>
-        </div>
-    </div>
-    {%endblock%}
+<div class="footer">
+  <div class="logo-container">
+      <img src="/static/images/uskudar_uni_logo.png" alt="Uskudar University Logo">
+      <p>Uskudar University</p>
+  </div>
+  <div class="contact-info">
+      <h3>Contact</h3>
+      <p>Phone: +90 216 400 22 22</p>
+      <p>Email: bilgi@uskudar.edu.tr</p>
+      <p>Address: Altunizade Mh. Üniversite Sokağı No: 14 PK:34662 Üsküdar / İstanbul / TÜRKİYE</p>
+  </div>
+  <div class="useful-links">
+      <h3>Useful Links</h3>
+      <ul>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="clubs.html">Clubs</a></li>
+          <li><a href="about.html">About Us</a></li>
+      </ul>
+  </div>
+</div>
+    
+
+<script>
+  function logout() {
+      // This will redirect to the login page
+      window.location.href = 'loginpages.html';
+  }
+  </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,8 +1,15 @@
-{%extends "manager_navbar.html"%}
-
-  {%block content%}
-
-  <style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKS Dashboard</title>
+  <!-- Bootstrap CSS ekleme -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome CSS ekleme -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- Özel stil ekleme -->
+<style>
     .dashboard-container {
       display: flex;
       justify-content: flex-start; /* Kartları sola yasla */
@@ -122,8 +129,7 @@
   z-index: 100; /* Üstte olmalı */
   left: 0;
   top: 0;
-  margin-left:10%;
-  width: 90%;
+  width: 100%;
   height: 100%;
   overflow: auto; /* İçerik fazlaysa kaydırma */
   background-color: rgb(0, 0, 0, 0.4); /* Arka plan rengi */
@@ -183,32 +189,31 @@ input[type="submit"]:hover {
 </style>
 
 
-    <button id="createEventButton" class="create-event-button">Create Activity Post</button>
+</head>
+<body>
 
-    
+    <button id="createEventButton" class="create-event-button">Create event</button>
+
+    <!-- Modal -->
     <div id="createEventModal" class="modal">
       <div class="modal-content">
         <span class="close-button">&times;</span>
-        <h2>Create Activity Post</h2>
-        <form id="createEventForm" method="post" action="{% url 'create_event' %}">
-          {%csrf_token%}
+        <h2>Create Event</h2>
+        <form id="createEventForm">
           <label for="eventName">Event name</label>
-          <input type="text" id="event_name" name="event_name" placeholder="Type here">
-          
-          <label for="eventName">Event type</label>
-          <input type="text" id="event_type" name="event_type" placeholder="Type here">
-
+          <input type="text" id="eventName" name="eventName" placeholder="Type here">
+    
           <label for="eventDate">Date</label>
-          <input type="date" id="event_date" name="event_date" placeholder="Type here">
+          <input type="text" id="eventDate" name="eventDate" placeholder="Type here">
     
           <label for="eventHall">Hall</label>
-          <select id="event_name" name="event_hall">
-            <option value="1">Select hall</option>
-            <option value="A Block 225">A Block 225</option>
+          <select id="eventHall" name="eventHall">
+            <option value="">Select hall</option>
+            <!-- Hall options -->
           </select>
     
           <label for="eventDescription">Description</label>
-          <textarea id="eventDescription" name="event_description" placeholder="Type here"></textarea>
+          <textarea id="eventDescription" name="eventDescription" placeholder="Type here"></textarea>
     
           <button type="submit" class="create-event-button">Create</button>
         </form>
@@ -220,14 +225,14 @@ input[type="submit"]:hover {
     <!-- Kart 1 -->
     <div class="dashboard-card">
       <h3>Total Clubs</h3>
-      <span class="number">{{total_clubs}}</span>
+      <span class="number">20</span>
       <i class="fas fa-users"></i>
     </div>
 
     <!-- Kart 2 -->
     <div class="dashboard-card">
       <h3>Total Members</h3>
-      <span class="number">{{total_users}}</span>
+      <span class="number">400</span>
       <i class="fas fa-user-plus"></i>
     </div>
   </div>
@@ -245,15 +250,24 @@ input[type="submit"]:hover {
         </tr>
       </thead>
       <tbody>
-       
-        {% for event in events %}
         <tr>
-          <td>{{ event.event_name }}</td>
-          <td>{{ event.event_type }}</td>
+          <td>Iftar Event</td>
+          <td>Social</td>
+          <td>29-03-2024</td>
+          <td><span class="state pending">Pending</span></td>
+        </tr>
+        <tr>
+          <td>Perfusion in Cardiovascular Surgery</td>
+          <td>Science</td>
+          <td>30-03-2024</td>
+          <td><span class="state pending">Pending</span></td>
+        </tr>
+        <tr>
+          <td>Ceramics Workshop</td>
+          <td>Social</td>
           <td>30-03-2024</td>
           <td><span class="state accepted">Accepted</span></td>
         </tr>
-        {% endfor %}
       </tbody>
     </table>
   </div>
@@ -267,7 +281,6 @@ input[type="submit"]:hover {
   
 <script>
     // Butona tıklama event'i
-    
 document.getElementById('createEventButton').onclick = function() {
   document.getElementById('createEventModal').style.display = 'block';
 };
@@ -276,7 +289,6 @@ document.getElementById('createEventButton').onclick = function() {
 document.querySelector('.close-button').onclick = function() {
   document.getElementById('createEventModal').style.display = 'none';
 };
-/*
 // Modal dışına tıklama event'i
 window.onclick = function(event) {
   var modal = document.getElementById('createEventModal');
@@ -291,19 +303,25 @@ document.getElementById('createEventForm').onsubmit = function(event) {
   // Form verileriyle bir şeyler yap
   document.getElementById('createEventModal').style.display = 'none';
   alert('Event created!');
-  
-};*/
+};
 
 </script>
 
 
 
     <div id="navbar-placeholder"></div>
-   
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('manager_navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            });
+    });
+    </script>
   <!-- Bootstrap JS ve bağımlılıkları (opsiyonel) -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-  {%endblock%}
+</body>
+</html>

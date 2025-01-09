@@ -1,17 +1,40 @@
-{%extends "admin_navbar.html"%}
-{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKS Dashboard</title>
+  <!-- Bootstrap CSS ekleme -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome CSS ekleme -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- Özel stil ekleme -->
+  <link rel="stylesheet" href="/static/css/admin_dashboard.css">
 
-{%block content%}
+
+</head>
+<body>
+
+  <!-- Ana içerik kartları -->
+  <div class="dashboard-container">
+    <!-- Kart 1 -->
+    <div class="dashboard-card">
+      <h3>Total Clubs</h3>
+      <span class="number">20</span>
+      <i class="fas fa-users"></i>
+    </div>
+
+    <!-- Kart 2 -->
     <div class="dashboard-card">
       <h3>Total Members</h3>
-      <span class="number">{{total_users}}</span>
+      <span class="number">400</span>
       <i class="fas fa-user-plus"></i>
     </div>
 
     <!-- Kart 3 -->
     <div class="dashboard-card">
       <h3>Total Events</h3>
-      <span class="number">{{total_events}}</span>
+      <span class="number">100</span>
       <i class="fas fa-calendar-check"></i>
     </div>
   </div>
@@ -20,22 +43,40 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Event</th>
-          <th scope="col">Type</th>
-          <th scope="col">time</th>
-          <th scope="col">State</th>
+          <th scope="col">CN</th>
+          <th scope="col">Names</th>
+          <th scope="col">Admin</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
-        {% for event in events %}
-              <tr>
-                <td>{{ event.event_name }}</td>
-                <td>{{event.event_type}}</td>
-                <td>{{event.event_date}}</td>
-                <td><button type="button" class="btn btn-primary"><a href="{%url 'update_event' pk=event.pk%}" style="text-decoration:none;color:black;">Edit</a></button>
-                </td>
-              </tr>
-        {% endfor %}
+        <tr>
+          <td>1</td>
+          <td>Ai club</td>
+          <td>Farah</td>
+          <td>
+            <button class="btn btn-primary">Edit</button>
+            <button class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Medical tech club</td>
+          <td>Xalimo</td>
+          <td>
+            <button class="btn btn-primary">Edit</button>
+            <button class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Social service club</td>
+          <td>Gele</td>
+          <td>
+            <button class="btn btn-primary">Edit</button>
+            <button class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
       </tbody>
     </table>
     <div class="view-more-container">
@@ -52,7 +93,7 @@
         <th>Event</th>
         <th>Type</th>
         <th>Time</th>
-        <th>state</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -138,8 +179,26 @@
        </div>
   </div>
   
+
+
+  
+  
+
+
+
+    <div id="navbar-placeholder"></div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('admin_navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            });
+    });
+    </script>
+  <!-- Bootstrap JS ve bağımlılıkları (opsiyonel) -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  {%endblock%}
+</body>
+</html>

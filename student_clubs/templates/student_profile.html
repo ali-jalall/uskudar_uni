@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management Dashboard</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px;
+        }
+        h2 {
+            color: #444;
+            margin-bottom: 10px;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+        .row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .column {
+            flex: 1;
+        }
+
+        /* Student Card */
+        .student-card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .student-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .student-card .info {
+            line-height: 1.5;
+        }
+        .student-card .info p {
+            margin: 5px 0;
+        }
+        .student-card .info p span {
+            font-weight: bold;
+        }
+
+        /* Monthly Calendar */
+        .calendar {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .calendar table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .calendar th, .calendar td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .calendar th {
+            background: #2d89ef;
+            color: white;
+        }
+        .calendar td {
+            position: relative;
+        }
+        .calendar .exam {
+            background: #ff6b6b;
+            color: white;
+            cursor: pointer;
+        }
+        .calendar .event {
+            background: #38d650;
+            color: white;
+            cursor: pointer;
+        }
+        .calendar .homework {
+            background: #f8d231;
+            color: white;
+            cursor: pointer;
+        }
+
+        .calendar .tooltip {
+            display: none;
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+        .calendar td:hover .tooltip {
+            display: block;
+        }
+
+        /* Announcements Section */
+        .announcements {
+            background: #ffffff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .announcements ul {
+            list-style: none;
+        }
+        .announcements ul li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+        }
+        .announcements ul li span {
+            font-weight: bold;
+        }
+
+        /* Weekly Schedule */
+        .weekly-plan {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .weekly-plan table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .weekly-plan th, .weekly-plan td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .weekly-plan th {
+            background: #28a745;
+            color: white;
+        }
+        .weekly-plan td input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            text-align: center;
+        }
+
+        /* Add Event Button */
+        .add-event-btn {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+        .add-event-btn button {
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-event-btn button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Student Card -->
+        <div class="row">
+            <div class="column">
+                <div class="student-card">
+                    <img src="/static/images/student_profile_photo.png" alt="Student Photo">
+                    <div class="info">
+                        <p><span>Name:</span> Ahmet Yilmaz</p>
+                        <p><span>ID Number:</span> 202301234</p>
+                        <p><span>Department:</span> Computer Engineering</p>
+                        <p><span>Class:</span> 2</p>
+                        <p><span>GPA:</span> 3.5</p>
+                    </div>
+                </div>
+
+                <!-- Announcements and Homework -->
+                <div class="announcements">
+                    <h2>Announcements and Homework</h2>
+                    <ul>
+                        <li><span>Announcement:</span> Programming Exam on January 10, 2025.</li>
+                        <li><span>Homework:</span> Physics Homework due by January 20, 2025.</li>
+                        <li><span>Upcoming Event:</span>Cookie for Movie 📽️" event is on Jan 6. Place📍: Kuleli Hall</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Monthly Calendar -->
+            <div class="column">
+                <div class="calendar">
+                    <h2>January Calendar</h2>
+                    <div class="add-event-btn">
+                        <button id="addEvent">+ Add Event</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                                <th>Sun</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>30</td>
+                                <td>31</td>
+                                <td class="exam">
+                                    <div title="Math Exam">1</div>
+                                </td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                 <td class="event">
+                                    <div title="Cookie for Movie Event Day">6</div>
+                                </td>
+                                <td>7</td>
+                                <td>8</td>
+                                <td>9</td>
+                                <td class="exam">
+                                    <div title="Programming Exam">10</div>
+                                </td>
+                                <td>11</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td>14</td>
+                                <td>15</td>
+                                <td>16</td>
+                                <td>17</td>
+                                <td>18</td>
+                                <td>19</td>
+                            </tr>
+                            <tr>
+                                <td class="homework">
+                                    <div title="Physics Homework Due">20</div>
+                                </td>
+                                <td>21</td>
+                                <td>22</td>
+                                <td>23</td>
+                                <td>24</td>
+                                <td>25</td>
+                                <td>26</td>
+                            </tr>
+                            <tr>
+                                <td>27</td>
+                                <td>28</td>
+                                <td>29</td>
+                                <td>30</td>
+                                <td>31</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weekly Schedule -->
+        <div class="weekly-plan">
+            <h2>Weekly Plan (6 Jan - 12 Jan)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                        <th>Sun</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>10:40 - 11:30</td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                    </tr>
+                     <tr>
+                        <td>11:40 - 12:30</td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                    </tr>
+                    <tr>
+                        <td>12:40 - 13:30</td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                    </tr>
+                     <tr>
+                        <td>13:40 - 14:30</td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                    </tr>
+                     <tr>
+                        <td>14:40 - 15:30</td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                    </tr>
+                     <tr>
+                        <td>15:40 - 16:30</td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                        <td><input type="text" placeholder=""></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        document.getElementById('addEvent').addEventListener('click', function() {
+            const eventDate = prompt('Enter the date for the event (e.g., 2024-01-15):');
+            const eventTitle = prompt('Enter the event title:');
+
+            if (eventDate && eventTitle) {
+                alert(Event "${eventTitle}" added for ${eventDate});
+            } else {
+                alert('Event addition cancelled.');
+            }
+        });
+    </script>
+
+    
+    <div id="navbar-placeholder"></div>
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+      fetch('navbar.html')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('navbar-placeholder').innerHTML = data;
+          });
+  });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

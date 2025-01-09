@@ -1,12 +1,11 @@
-{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{%static '/css/footer.css'%}">
-    <link rel="stylesheet" href="{%static '/css/cardconteynir.css'%}">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/cardconteynir.css">
     <style>
 
 
@@ -162,44 +161,6 @@ hr {
 .card-time {
     margin: 0;
 }
-.myform input{
-    width:80%;
-    height:2em;
-    margin: 1em auto;
-    display:block
-}
-.myform {
-    width:90%;
-    margin:auto;
-    height:auto;
-    padding:2em;
-}
-.myform label{
-    font-weight: bold;
-    margin: 1em 0 1em 6em;
-    font-size:1.2em;
-}
-.myform select{
-    display:block;
-    margin: 1em auto;
-    width:80%;
-    height:2em;
-}
-.myform textarea{
-    width:80%;
-    margin: 1em auto;
-    display:block
-}
-.myform button{
-    height:4em;
-    background-color: darkblue;
-    color:white;
-    width:8em;
-    margin-top: 2em;
-}
-.myform button:hover{
-    cursor: pointer;
-}
 @media (max-width: 768px) {
     .event-calendar-container {
         align-items: center;
@@ -220,56 +181,29 @@ hr {
     }
     
 }
-
-
-
-
-
     </style>
 </head>
 <body>
     
     <div class="container my-5 mt-5">
-    
+        <!-- Event Calendar Başlığı ve Arama Çubuğu -->
         <hr>
-        
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <h2 class="mb-0">Event Calendar</h2>
+            </div>
+            <div class="col-md-6 text-right">
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="search for events">
+                    <button class="search-button">🔍</button>
+                </div>
+            </div>
+        </div>
         <hr class="mt-0">
     </div>
-    <div class="container">
-        <h1>Update Event <span style="color:#0056b3;font-weight:bold;font-size:1em;">{{eventupdate.event_name}}</span></h1>
-    </div>
     
-    <div class="container myform" style="width:50%;margin-top:2em;background-color:#fdfbf2;margin-bottom:4em;">
-        <form method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-          <label for="eventName">Event name</label>
-          <input type="text" id="event_name" name="event_name" placeholder="Type here" value="{{eventupdate.event_name}}">
-          <br/>
-          <label for="eventName">Event type</label>
-          <input type="text" id="event_type" name="event_type" placeholder="Type here" value="{{eventupdate.event_type}}">
-            <br/>
-          <label for="eventDate">Date : {{eventupdate.event_date}}</label>
-          <input type="date" id="event_date" name="event_date" placeholder="Type here" value="{{eventupdate.event_date}}">
-            <br/>
-          <label for="eventHall">Hall</label>
-          <select id="event_name" name="event_hall">
-            <option value="{{eventupdate.event_hall}}">{{eventupdate.event_hall}}</option>
-            <option value="A Block 225">A Block 225</option>
-          </select>
-          <br/>
-          <label for="eventHall">Status : {{eventupdate.event_status}}</label>
-          <select id="event_name" name="event_status">
-            <option value="{{eventupdate.event_status}}"></option>
-            <option value="Approved">Approved</option>
-            <option value="Declined">Declined</option>
-          </select>
-          <br/>
-          <label for="eventDescription">Description</label>
-          <textarea id="eventDescription" name="event_description" placeholder="Type here" value="{{eventupdate.event_description}}">{{eventupdate.event_description}}</textarea>
-          <br/>
-          <button type="submit" class="btn btn-primary btn-block" style="width:40%;margin-left:30%;background-color:#66cdaa;border:none;font-weight:bold;">Update Event</button><br><br>
-        </form>
-    </div>
+    
+    
 
     <div class="container" >
        
@@ -277,16 +211,16 @@ hr {
             <!-- İlk Kart -->
             <div class="col-sm">
                 <div class="card">
-                    <img src="{%static '/images/etkinlik1.png'%}" class="card-img-top" alt="...">
+                    <img src="/static/images/etkinlik1.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <div class="card-event-date">
-                            <span class="card-icon">🗓️</span>15 Apr 2024
+                            <span class="card-icon">🗓️</span> 6 Jan 2025
                         </div>
-                        <h5 class="card-title">Cookie Cor Movie Event</h5>
-                        <p class="card-text">Red Sea University Central Campus</p>
-                        <p class="card-time">16:00Pm</p>
+                        <h5 class="card-title">Cookie For Movie Event</h5>
+                        <p class="card-text">Uskudar University Carsi Campus</p>
+                        <p class="card-time">16:00</p>
                         <div class="button-container">
-                            <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+                            <a href="newevent.html" class="fancy-button" role="button">Information For Event</a>
                         </div>
                         
 
@@ -297,14 +231,14 @@ hr {
             <!-- İkinci Kart -->
             <div class="col-sm">
                 <div class="card">
-                    <img src="{%static '/images/etkinlik2.png'%}" class="card-img-top" alt="...">
+                    <img src="/static/images/etkinlik2.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <div class="card-event-date">
-                            <span class="card-icon">🗓️</span>27 Mar 2024
+                            <span class="card-icon">🗓️</span>2 Mar 2025
                         </div>
                         <h5 class="card-title">Iftar Program</h5>
-                        <p class="card-text">Red Sea University Central Campus</p>
-                        <p class="card-time">16:00Pm</p>
+                        <p class="card-text">Uskudar University Main Campus</p>
+                        <p class="card-time">18:00</p>
                         <div class="button-container">
                             <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
                         </div>
@@ -316,14 +250,14 @@ hr {
             <!-- Üçüncü Kart -->
             <div class="col-sm">
                 <div class="card">
-                    <img src="{%static '/images/etkinlik3.png'%}" class="card-img-top" alt="...">
+                    <img src="/static/images/etkinlik3.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <div class="card-event-date">
-                            <span class="card-icon">🗓️</span>27 Mar 2024
+                            <span class="card-icon">🗓️</span>7 Feb 2025
                         </div>
                         <h5 class="card-title">Medical Skills Workshop</h5>
-                        <p class="card-text">Red Sea University Central Campus</p>
-                        <p class="card-time">16:00Pm</p>
+                        <p class="card-text">Faculty of Medicine NP Campus</p>
+                        <p class="card-time">14:00</p>
                         <div class="button-container">
                             <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
                         </div>
@@ -333,19 +267,242 @@ hr {
             </div>
         </div>
         
+        <div class="row my-5">
+            <!-- İlk Kart -->
+            <div class="col-sm">
+                <div class="card">
+                    <img src="/static/images/etkinlik4.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="card-event-date">
+                            <span class="card-icon">🗓️</span>27 Jan 2024
+                        </div>
+                        <h5 class="card-title">Inspiring Women</h5>
+                        <p class="card-text">Uskudar University South Campus</p>
+                        <p class="card-time">12:00</p>
+                        <div class="button-container">
+                            <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         
+            <!-- İkinci Kart -->
+            <div class="col-sm">
+                <div class="card">
+                    <img src="/static/images/etkinlik5.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="card-event-date">
+                            <span class="card-icon">🗓️</span>10 Jan 2024
+                        </div>
+                        <h5 class="card-title">Importance of teamwork</h5>
+                        <p class="card-text">Uskudar University Main Campus</p>
+                        <p class="card-time">11:00</p>
+                        <div class="button-container">
+                            <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         
-           
+            <!-- Üçüncü Kart -->
+            <div class="col-sm">
+                <div class="card">
+                    <img src="/static/images/etkinlik6.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="card-event-date">
+                            <span class="card-icon">🗓️</span> 8 Jan 2025
+                        </div>
+                        <h5 class="card-title">Dentistry Students</h5>
+                        <p class="card-text">Uskudar University Faculty of Medicine NP Campus</p>
+                        <p class="card-time">13:00</p>
+                        <div class="button-container">
+                            <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
         
+        <div class="row my-5">
+            <!-- İlk Kart -->
+            <div class="col-sm">
+                <div class="card">
+                    <img src="/static/images/etkinlik7.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="card-event-date">
+                            <span class="card-icon">🗓️</span>6 Jan 2025
+                        </div>
+                        <h5 class="card-title">AI 4 Health</h5>
+                        <p class="card-text">Uskudar University Main Campus</p>
+                        <p class="card-time">16:00</p>
+                        <div class="button-container">
+                            <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         
-      
+            <!-- İkinci Kart -->
+            <div class="col-sm">
+                <div class="card">
+                    <img src="/static/images/etkinlik8.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="card-event-date">
+                            <span class="card-icon">🗓️</span>28 Feb 2025
+                        </div>
+                        <h5 class="card-title">Women's Human Rights</h5>
+                        <p class="card-text">Uskudar University Carsi Campus</p>
+                        <p class="card-time">13:00</p>
+                        <div class="button-container">
+                            <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         
-           
-           
-       
+            <!-- Üçüncü Kart -->
+            <div class="col-sm">
+                <div class="card">
+                    <img src="/static/images/etkinlik9.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="card-event-date">
+                            <span class="card-icon">🗓️</span>1 Mar 2025
+                        </div>
+                        <h5 class="card-title">Nobel Presentation</h5>
+                        <p class="card-text">Uskudar University Main Campus</p>
+                        <p class="card-time">14:00</p>
+                        <div class="button-container">
+                            <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
         
+        <div class="row my-5">
+            <!-- İlk Kart -->
+            <div class="col-sm">
+                <div class="card">
+                    <img src="/static/images/etkinlik10.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="card-event-date">
+                            <span class="card-icon">🗓️</span>2 Jan 2025
+                        </div>
+                        <h5 class="card-title">Women in technology</h5>
+                        <p class="card-text">Uskudar University South Campus</p>
+                        <p class="card-time">16:00</p>
+                        <div class="button-container">
+                            <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         
-    
+            <!-- İkinci Kart -->
+            <div class="col-sm">
+                <div class="card">
+                    <img src="/static/images/etkinlik11.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="card-event-date">
+                            <span class="card-icon">🗓️</span>6 Jan 2025
+                        </div>
+                        <h5 class="card-title">AI 4 Health</h5>
+                        <p class="card-text">Uskudar University Main Campus</p>
+                        <p class="card-time">13:00</p>
+                        <div class="button-container">
+                            <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Üçüncü Kart -->
+            <div class="col-sm">
+                <div class="card">
+                    <img src="/static/images/etkinlik12.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="card-event-date">
+                            <span class="card-icon">🗓️</span>30 Dec 2024
+                        </div>
+                        <h5 class="card-title">Somali Coffee Break</h5>
+                        <p class="card-text">Uskudar University Main Campus</p>
+                        <p class="card-time">15:00</p>
+                        <div class="button-container">
+                            <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row my-5">
+            <!-- İlk Kart -->
+            <div class="col-sm">
+                <div class="card">
+                    <img src="/static/images/etkinlik13.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="card-event-date">
+                            <span class="card-icon">🗓️</span>1 Feb 2025
+                        </div>
+                        <h5 class="card-title">Project Management 101</h5>
+                        <p class="card-text">Uskudar University Main Campus</p>
+                        <p class="card-time">17:00</p>
+                        <div class="button-container">
+                            <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        
+            <!-- İkinci Kart -->
+            <div class="col-sm">
+                <div class="card">
+                    <img src="/static/images/etkinlik14.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="card-event-date">
+                            <span class="card-icon">🗓️</span>27 Jan 2025
+                        </div>
+                        <h5 class="card-title">Music And Tunes</h5>
+                        <p class="card-text">Uskudar University Carsi Campus</p>
+                        <p class="card-time">14:00</p>
+                        <div class="button-container">
+                            <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Üçüncü Kart -->
+            <div class="col-sm">
+                <div class="card">
+                    <img src="/static/images/etkinlik15.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="card-event-date">
+                            <span class="card-icon">🗓️</span>12 Jan 2025
+                        </div>
+                        <h5 class="card-title">Orphan Sponsorship</h5>
+                        <p class="card-text">Uskudar University Main Campus</p>
+                        <p class="card-time">12:00</p>
+                        <div class="button-container">
+                            <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            
         </div>
         
           
@@ -354,25 +511,25 @@ hr {
     </div>
 
     <div class="footer">
-        <div class="logo-container">
-            <img src="{%static '/images/rectangle11.png'%}" alt="Red Sea University Logo">
-            <p>T.C Red Sea University</p>
-        </div>
-        <div class="contact-info">
-            <h3>Contact</h3>
-            <p>Phone: +905523571582</p>
-            <p>Email: Redseauniv@gmail.com</p>
-            <p>Address: 2521 Barrboro Dr. Assosk, VN 87100 SESB</p>
-        </div>
-        <div class="useful-links">
-            <h3>Useful Links</h3>
-            <ul>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="clubs.html">Clubs</a></li>
-                <li><a href="about.html">About Us</a></li>
-            </ul>
-        </div>
-    </div>
+  <div class="logo-container">
+      <img src="/static/images/uskudar_uni_logo.png" alt="Uskudar University Logo">
+      <p>Uskudar University</p>
+  </div>
+  <div class="contact-info">
+      <h3>Contact</h3>
+      <p>Phone: +90 216 400 22 22</p>
+      <p>Email: bilgi@uskudar.edu.tr</p>
+      <p>Address: Altunizade Mh. Üniversite Sokağı No: 14 PK:34662 Üsküdar / İstanbul / TÜRKİYE</p>
+  </div>
+  <div class="useful-links">
+      <h3>Useful Links</h3>
+      <ul>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="clubs.html">Clubs</a></li>
+          <li><a href="about.html">About Us</a></li>
+      </ul>
+  </div>
+</div>
     
 
     <script>

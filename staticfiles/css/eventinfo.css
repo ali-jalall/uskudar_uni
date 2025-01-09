@@ -2,21 +2,21 @@
     display: flex;
     align-items: center;
     justify-content: flex-start; /* İçerikleri sol tarafa hizala */
-    padding: 20px;
+    padding: 60px;
     max-width: 1200px;
     margin: auto;
   }
   
   .event-image img {
-    width: 500px; /* Resmin genişliğini ayarla */
+    width: 700px; /* Resmin genişliğini ayarla */
     height: auto;
     border-radius: 10px;
-    margin-right: 50px; /* Sağdaki bilgi bölümü ile arasındaki boşluğu ayarla */
+    margin-right: 0 px; /* Sağdaki bilgi bölümü ile arasındaki boşluğu ayarla */
   }
   
   .event-info {
     /* Eğer bilgi bölümü hala çok sağda ise bu değeri artırabilirsiniz */
-    margin-left: 300px; /* Sağdaki bilgi bölümü ile arasındaki boşluğu ayarla */
+    margin-left: 150px; /* Sağdaki bilgi bölümü ile arasındaki boşluğu ayarla */
     font-family: Arial, sans-serif;
   }
   
@@ -51,15 +51,12 @@
 /* Önceki CSS stilinizin devamı... */
 
 .event-description {
-    margin-top: 20px;
+    margin-top: 0 px;
     padding: 0 15px;
     text-align: justify;
     font-size: 16px;
     color: #333;
     max-width: 800px; 
-    margin-left: 50px; 
+    margin-left: 170px; 
     margin-right: auto; /* Metni sağa kaydırmak için kullanın, bu değer arttıkça metin sağa doğru kayar */
   }
- 
-  
-  

@@ -1,186 +1,195 @@
-{%extends "manager_navbar.html"%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <!-- Bootstrap CSS ekleme -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome CSS ekleme -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- Özel stil ekleme -->
 
+    <style>
+        .dashboard-container {
+      display: flex;
+      justify-content: flex-start; /* Kartları sola yasla */
+      flex-wrap: wrap;
+      margin-top: 100px; /* Navbar yüksekliği ve ekstra boşluk */
+      margin-left: 150px; /* Kartları biraz daha sağa kaydır */
+    }
+    .main-content {
+      margin-top: 100px; /* NavBar yüksekliği + istediğiniz ek boşluk */
+      margin-left: 300px; /* SideBar genişliğini artırarak kartları sağa kaydır */
+      padding: 20px;
+    }
+    /* Ana içerik kartları için stil */
+    .dashboard-card {
+      background-color: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      margin: 20px;
+    }
 
-{%block content%}
+    .dashboard-card h3 {
+      color: #24305E;
+      margin-bottom: 10px;
+    }
 
-<style>
-  .dashboard-container {
-display: flex;
-justify-content: flex-start; /* Kartları sola yasla */
-flex-wrap: wrap;
-margin-top: 100px; /* Navbar yüksekliği ve ekstra boşluk */
-margin-left: 150px; /* Kartları biraz daha sağa kaydır */
-}
-.main-content {
-margin-top: 100px; /* NavBar yüksekliği + istediğiniz ek boşluk */
-margin-left: 300px; /* SideBar genişliğini artırarak kartları sağa kaydır */
-padding: 20px;
-}
-/* Ana içerik kartları için stil */
-.dashboard-card {
-background-color: #ffffff;
-border-radius: 20px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 20px;
-margin: 20px;
-}
+    .dashboard-card .number {
+      color: #24305E;
+      font-size: 36px;
+      font-weight: bold;
+    }
 
-.dashboard-card h3 {
-color: #24305E;
-margin-bottom: 10px;
-}
+    .dashboard-card i {
+      color: #24305E;
+      margin: 10px;
+    }
 
-.dashboard-card .number {
-color: #24305E;
-font-size: 36px;
-font-weight: bold;
-}
-
-.dashboard-card i {
-color: #24305E;
-margin: 10px;
-}
-
-.dashboard-container {
-display: flex;
-justify-content: space-around;
-flex-wrap: wrap;
-margin-top: 20px; /* Navbar yüksekliği ve ekstra boşluk */
-
-}
-.event-table-container {
-  margin-top: 100px; /* NavBar yüksekliği + istediğiniz ek boşluk */
-margin-left: 300px; /* SideBar genişliğini artırarak kartları sağa kaydır */
-padding: 20px;
-font-family: Arial, sans-serif;
+    .dashboard-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 20px; /* Navbar yüksekliği ve ekstra boşluk */
+      
+    }
+    .event-table-container {
+        margin-top: 100px; /* NavBar yüksekliği + istediğiniz ek boşluk */
+      margin-left: 300px; /* SideBar genişliğini artırarak kartları sağa kaydır */
+      padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
 .event-table {
-width: 100%;
-border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .event-table th,
 .event-table td {
-text-align: left;
-padding: 8px;
-border-bottom: 1px solid #ddd;
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
 }
 
 .event-table thead {
-background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 .state {
-padding: 5px 10px;
-color: white;
-text-transform: uppercase;
-font-weight: bold;
-border-radius: 4px;
-text-align: center;
-display: inline-block;
+  padding: 5px 10px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 4px;
+  text-align: center;
+  display: inline-block;
 }
 
 .pending {
-background-color: #f0ad4e; /* Oranj rengi arka plan */
+  background-color: #f0ad4e; /* Oranj rengi arka plan */
 }
 
 .accepted {
-background-color: #5cb85c; /* Yeşil arka plan */
+  background-color: #5cb85c; /* Yeşil arka plan */
 }
 
 /* Daha iyi bir görsel ayrım için durumları ortalar */
 .event-table td:last-child {
-text-align: center;
+  text-align: center;
 }
 
 /* Buton stillemesi */
 .create-event-button {
-background-color: #007bff; /* Mavi arka plan */
-border: none;
-border-radius: 4px;
-padding: 10px 20px;
-color: white;
-text-transform: uppercase;
-cursor: pointer;
-font-size: 16px;
-margin: 20px auto; /* Merkezleme */
-display: block;
+  background-color: #007bff; /* Mavi arka plan */
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 20px auto; /* Merkezleme */
+  display: block;
 }
 
 .create-event-button:hover {
-background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 /* Modal stillemesi */
 .modal {
-display: none; /* Başlangıçta modal görünmemeli */
-position: fixed; /* Sabit pozisyon */
-z-index: 100; /* Üstte olmalı */
-left: 0;
-top: 0;
-width: 90%;
-margin-left:10%;
-height: 100%;
-overflow: auto; /* İçerik fazlaysa kaydırma */
-background-color: rgb(0, 0, 0, 0.4); /* Arka plan rengi */
+  display: none; /* Başlangıçta modal görünmemeli */
+  position: fixed; /* Sabit pozisyon */
+  z-index: 100; /* Üstte olmalı */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* İçerik fazlaysa kaydırma */
+  background-color: rgb(0, 0, 0, 0.4); /* Arka plan rengi */
 }
 
 .modal-content {
-background-color: #fefefe;
-margin: 10% auto; /* Üst ve otomatik merkezleme */
-padding: 20px;
-border: 1px solid #888;
-width: 80%; /* Genişlik */
+  background-color: #fefefe;
+  margin: 10% auto; /* Üst ve otomatik merkezleme */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Genişlik */
 }
 
 .close-button {
-color: #aaa;
-float: right;
-font-size: 28px;
-font-weight: bold;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .close-button:hover,
 .close-button:focus {
-color: black;
-text-decoration: none;
-cursor: pointer;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* Form elemanları stillemesi */
 input[type="text"],
 textarea,
 select {
-width: 100%;
-padding: 12px 20px;
-margin: 8px 0;
-display: inline-block;
-border: 1px solid #ccc;
-border-radius: 4px;
-box-sizing: border-box; /* Kutu modeli */
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Kutu modeli */
 }
 
 input[type="submit"] {
-width: 100%;
-background-color: #4CAF50;
-color: white;
-padding: 14px 20px;
-margin: 8px 0;
-border: none;
-border-radius: 4px;
-cursor: pointer;
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 input[type="submit"]:hover {
-background-color: #45a049;
+  background-color: #45a049;
 }
 
-</style>
+    </style>
+</head>
+<body>
+
     <button id="createEventButton" class="create-event-button">Create event</button>
 
     <!-- Modal -->
@@ -188,25 +197,21 @@ background-color: #45a049;
       <div class="modal-content">
         <span class="close-button">&times;</span>
         <h2>Create Event</h2>
-        <form id="createEventForm" method="post" action="{% url 'create_event_manager' %}">
-          {%csrf_token%}
+        <form id="createEventForm">
           <label for="eventName">Event name</label>
-          <input type="text" id="event_name" name="event_name" placeholder="Type here">
-          
-          <label for="eventName">Event type</label>
-          <input type="text" id="event_type" name="event_type" placeholder="Type here">
-
+          <input type="text" id="eventName" name="eventName" placeholder="Type here">
+    
           <label for="eventDate">Date</label>
-          <input type="date" id="event_date" name="event_date" placeholder="Type here">
+          <input type="text" id="eventDate" name="eventDate" placeholder="Type here">
     
           <label for="eventHall">Hall</label>
-          <select id="event_name" name="event_hall">
-            <option value="1">Select hall</option>
-            <option value="A Block 225">A Block 225</option>
+          <select id="eventHall" name="eventHall">
+            <option value="">Select hall</option>
+            <!-- Hall options -->
           </select>
     
           <label for="eventDescription">Description</label>
-          <textarea id="eventDescription" name="event_description" placeholder="Type here"></textarea>
+          <textarea id="eventDescription" name="eventDescription" placeholder="Type here"></textarea>
     
           <button type="submit" class="create-event-button">Create</button>
         </form>
@@ -218,14 +223,14 @@ background-color: #45a049;
     <!-- Kart 1 -->
     <div class="dashboard-card">
       <h3>Total Clubs</h3>
-      <span class="number">{{total_clubs}}</span>
+      <span class="number">20</span>
       <i class="fas fa-users"></i>
     </div>
 
     <!-- Kart 2 -->
     <div class="dashboard-card">
       <h3>Total Members</h3>
-      <span class="number">{{total_users}}</span>
+      <span class="number">400</span>
       <i class="fas fa-user-plus"></i>
     </div>
   </div>
@@ -243,15 +248,54 @@ background-color: #45a049;
         </tr>
       </thead>
       <tbody>
-       
-        {% for event in events %}
         <tr>
-          <td>{{ event.event_name }}</td>
-          <td>{{ event.event_type }}</td>
+          <td>Iftar Event</td>
+          <td>Social</td>
+          <td>29-03-2024</td>
+          <td><span class="state pending">Pending</span></td>
+        </tr>
+        <tr>
+          <td>Iftar Event</td>
+          <td>Social</td>
+          <td>29-03-2024</td>
+          <td><span class="state pending">Pending</span></td>
+        </tr>
+        <tr>
+          <td>Iftar Event</td>
+          <td>Social</td>
+          <td>29-03-2024</td>
+          <td><span class="state pending">Pending</span></td>
+        </tr>
+        <tr>
+          <td>Iftar Event</td>
+          <td>Social</td>
+          <td>29-03-2024</td>
+          <td><span class="state pending">Pending</span></td>
+        </tr>
+        <tr>
+          <td>Perfusion in Cardiovascular Surgery</td>
+          <td>Science</td>
+          <td>30-03-2024</td>
+          <td><span class="state pending">Pending</span></td>
+        </tr>
+        <tr>
+            <td>Perfusion in Cardiovascular Surgery</td>
+            <td>Science</td>
+            <td>30-03-2024</td>
+            <td><span class="state pending">Pending</span></td>
+          </tr>
+          <tr>
+            <td>Perfusion in Cardiovascular Surgery</td>
+            <td>Science</td>
+            <td>30-03-2024</td>
+            <td><span class="state pending">Pending</span></td>
+          </tr>
+        <tr>
+          <td>Ceramics Workshop</td>
+          <td>Social</td>
           <td>30-03-2024</td>
           <td><span class="state accepted">Accepted</span></td>
         </tr>
-        {% endfor %}
       </tbody>
     </table>
   </div>
@@ -278,7 +322,6 @@ window.onclick = function(event) {
     modal.style.display = 'none';
   }
 };
-/*
 // Form gönderme işlemi
 document.getElementById('createEventForm').onsubmit = function(event) {
   event.preventDefault();
@@ -286,12 +329,25 @@ document.getElementById('createEventForm').onsubmit = function(event) {
   document.getElementById('createEventModal').style.display = 'none';
   alert('Event created!');
 };
-*/
+
 </script>
 
 
+
+
+    <div id="navbar-placeholder"></div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('manager_navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            });
+    });
+    </script>
+  <!-- Bootstrap JS ve bağımlılıkları (opsiyonel) -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  {%endblock%}
+</body>
+</html>
