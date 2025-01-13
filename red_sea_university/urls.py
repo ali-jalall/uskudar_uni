@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from student_clubs.views import UpdateEventView, UpdateClubView, MyLogin, StudentDash, EventCreateView, EventListView, EventUpdateView, ListEvent, CreateEvent, UpdateEvent, ListActivity, UpdateEventAdmin, ListActivityAdmin, ListActivityAdminDashboard, UpdateEventAdminDashboard, ClubListView, ClubCreateView, StudentProfile, ClubUpdateView, StudentClubs, About, StudentEvent, AdminActivityPost, sign_up_student
+from student_clubs.views import CreateEventAPI, EventAPIView, UpdateEventView, UpdateClubView, MyLogin, StudentDash, EventCreateView, EventListView, EventUpdateView, ListEvent, CreateEvent, UpdateEvent, ListActivity, UpdateEventAdmin, ListActivityAdmin, ListActivityAdminDashboard, UpdateEventAdminDashboard, ClubListView, ClubCreateView, StudentProfile, ClubUpdateView, StudentClubs, About, StudentEvent, AdminActivityPost, sign_up_student
 from django.contrib.auth.views import LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
@@ -26,6 +26,8 @@ urlpatterns = [
     path('student/clubs/', StudentClubs.as_view(), name="student_clubs"),
     path('student/profile/', StudentProfile.as_view(), name="student_profile"),
     path('student/event', StudentEvent.as_view(), name="student_event"),
+    path('api/create_event/', CreateEventAPI.as_view(), name='api_create_event'),
+    path('api/events/', EventAPIView.as_view(), name='event_api'),
     path('Student/CreateAccount', sign_up_student ,name='signup'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
 ]

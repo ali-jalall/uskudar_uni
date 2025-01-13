@@ -1,4 +1,4 @@
-{% include 'navbar.html' %}
+{% include 'navbar.html' %} {% csrf_token %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +76,7 @@
       .calendar td {
         position: relative;
       }
-      .calendar .exam {
+      /* .calendar .exam {
         background: #ff6b6b;
         color: white;
         cursor: pointer;
@@ -90,7 +90,7 @@
         background: #f8d231;
         color: white;
         cursor: pointer;
-      }
+      } */
 
       .calendar .tooltip {
         display: none;
@@ -382,11 +382,101 @@
           const eventTitle = prompt("Enter the event title:");
 
           if (eventDate && eventTitle) {
-            alert(Event`${eventTitle}" added for ${eventDate}`);
+            const csrfToken = document.querySelector(
+              "[name=csrfmiddlewaretoken]"
+            ).value;
+
+            fetch("/api/create_event/", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken,
+              },
+              body: JSON.stringify({
+                event_name: eventTitle,
+                event_date: eventDate,
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.message) {
+                  alert(`Event "${eventTitle}" added for ${eventDate}`);
+                } else {
+                  alert(`Error: ${data.error}`);
+                }
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+                alert("An error occurred while adding the event.");
+              });
           } else {
             alert("Event addition cancelled.");
           }
         });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const apiUrl = "/api/events/"; // Your API endpoint
+
+        // Function to fetch and map events to the table
+        async function loadEvents() {
+          try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+              throw new Error("Failed to fetch events");
+            }
+
+            const events = await response.json();
+
+            // Get all table cells
+            const tableCells = document.querySelectorAll("tbody td");
+
+            // Map events to the table
+            events.forEach((event) => {
+              const eventDate = new Date(event.event_date);
+              if (eventDate.getFullYear() === 2025) {
+                const eventDay = eventDate.getDate(); // Get the day of the month
+
+                tableCells.forEach((cell) => {
+                  // Match the cell date
+                  if (cell.textContent.trim() === String(eventDay)) {
+                    const eventDiv = document.createElement("div");
+                    eventDiv.textContent = cell.textContent; // Keep the original date
+                    eventDiv.title = event.event_name;
+                    cell.textContent = ""; // Clear the cell text
+                    cell.appendChild(eventDiv);
+
+                    // Add class based on event type
+                    if (event.event_type === "Exam") {
+                      cell.classList.add("exam");
+                    } else if (event.event_type === "Homework") {
+                      cell.classList.add("homework");
+                    } else {
+                      cell.classList.add("event");
+                    }
+
+                    // Color coding for past and future dates
+                    const today = new Date();
+                    if (eventDate < today) {
+                      cell.style.backgroundColor = "red"; // Past event
+                      cell.style.color = "white"; // Past event
+                    } else {
+                      cell.style.backgroundColor = "green"; // Future event
+                      cell.style.color = "white"; // Future event
+                    }
+                  }
+                });
+              }
+            });
+          } catch (error) {
+            console.error("Error loading events:", error);
+          }
+        }
+
+        // Call the function to load events
+        loadEvents();
+      });
     </script>
 
     <div id="navbar-placeholder"></div>

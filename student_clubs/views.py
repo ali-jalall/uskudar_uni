@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import TemplateView
@@ -16,6 +17,8 @@ from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 class CustomLogoutView(LogoutView):
     next_page = '/'  # This ensures redirection after logout
@@ -127,6 +130,31 @@ class UpdateEvent(UpdateView, LoginRequiredMixin):
     context_object_name = "eventupdate"
     def get_success_url(self):
         return reverse('manager_dashboard')
+    
+class CreateEventAPI(View):
+    def post(self, request, *args, **kwargs):
+        try:
+            data = json.loads(request.body)
+            event_name = data.get("event_name")
+            event_date = data.get("event_date")
+            event_type = data.get("event_type", "General")
+            event_hall = data.get("event_hall", "Main Hall")
+            event_description = data.get("event_description", "No description provided.")
+
+            if not event_name or not event_date:
+                return JsonResponse({'error': 'Event name and date are required.'}, status=400)
+
+            Event.objects.create(
+                event_name=event_name,
+                event_date=event_date,
+                event_type=event_type,
+                event_hall=event_hall,
+                event_description=event_description
+            )
+            return JsonResponse({'message': 'Event created successfully.'}, status=201)
+
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
 
 class UpdateEventView(View):
     def post(self, request, *args, **kwargs):
@@ -270,6 +298,28 @@ class StudentEvent(ListView, LoginRequiredMixin):
 
     def get_queryset(self): 
         return Event.objects.all()
+    
+class EventAPIView(View):
+    def get(self, request, *args, **kwargs):
+        try:
+            events = Event.objects.all().order_by('event_date')
+
+            event_data = [
+                {
+                    "event_name": event.event_name,
+                    "event_date": event.event_date.strftime("%Y-%m-%d"),
+                    "event_type": event.event_type,
+                    "event_hall": event.event_hall,
+                    "event_description": event.event_description,
+                }
+                for event in events
+            ]
+
+            return JsonResponse(event_data, safe=False)
+
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
 
 
 class AdminActivityPost(TemplateView):
