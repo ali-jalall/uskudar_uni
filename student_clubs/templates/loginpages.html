@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -145,13 +146,20 @@
   <!-- Student Modal -->
   <div id="studentModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="hideModal('studentModal')">&times;</span>
-      <div class="modal-header">Login for Students</div>
-      <input type="text" id="studentUsername" placeholder="Enter Email" name="email" required>
-      <input type="password" id="studentPassword" placeholder="Enter Password" name="password" required>
-      <button class="login-btn" onclick="login('student')">Login</button>
+      <form id="login-form" method="post">
+        {%csrf_token%}
+        <span class="close" onclick="hideModal('studentModal')">&times;</span>
+        <div class="modal-header">Login for Students</div>
+        <input type="text" id="username" placeholder="Enter Email" name="username" required>
+        <input type="password" id="password" placeholder="Enter Password" name="password" required>
+        {%if form.non_field_errors %}
+          <small style='color:red;margin-left:7em;'>Invalid Email or Password</small>
+        {%endif%}
+        <button class="login-btn" type="submit">Login</button>
+      </form>
       <div class="modal-footer">
-        <a href="register.html">Register</a> | <a href="forgot-password.html">Forgot Password?</a>
+        <a href="{%url 'signup'%}">Register</a>
+        <h5 style="color:green;">Contact the admin if you forgot the password</h5>
       </div>
     </div>
   </div>
@@ -159,26 +167,39 @@
   <!-- Admin Modal -->
   <div id="adminModal" class="modal">
     <div class="modal-content">
+      <form id="login-form" method="post">
+        {%csrf_token%}
       <span class="close" onclick="hideModal('adminModal')">&times;</span>
       <div class="modal-header">Login for SKS Admin</div>
-      <input type="text" id="adminUsername" placeholder="Enter Email" name="email" required>
+      <input type="text" id="username" placeholder="Enter Email" name="username" required>
       <input type="password" id="adminPassword" placeholder="Enter Password" name="password" required>
-      <button class="login-btn" onclick="login('admin')">Login</button>
+      {%if form.non_field_errors %}
+          <small style='color:red;margin-left:7em;'>Invalid Email or Password</small>
+        {%endif%}
+      <button class="login-btn" type="submit">Login</button>
+        </form>
     </div>
   </div>
   
   <!-- Club Manager Modal -->
   <div id="managerModal" class="modal">
     <div class="modal-content">
+      <form id="login-form" method="post">
+        {%csrf_token%}
       <span class="close" onclick="hideModal('managerModal')">&times;</span>
       <div class="modal-header">Login for Club Manager</div>
-      <input type="text" id="managerUsername" placeholder="Enter Email" name="email" required>
-      <input type="password" id="managerPassword" placeholder="Enter Password" name="password" required>
-      <button class="login-btn" onclick="login('manager')">Login</button>
+      <input type="text" id="username" placeholder="Enter Email" name="username" required>
+      <input type="password" id="password" placeholder="Enter Password" name="password" required>
+      {%if form.non_field_errors %}
+          <small style='color:red;margin-left:7em;'>Invalid Email or Password</small>
+        {%endif%}
+      <button class="login-btn" type="submit">Login</button>
+      </form>
     </div>
   </div>
-
+  
   <script>
+  // Modals related functions
   function showModal(modalId) {
     document.getElementById(modalId).style.display = 'block';
   }
@@ -187,29 +208,39 @@
     document.getElementById(modalId).style.display = 'none';
   }
   
+  // Dummy login function to redirect based on user type
   function login(userType) {
     var username = document.getElementById(userType + 'Username').value;
     var password = document.getElementById(userType + 'Password').value;
-    if (username !== '' && password !== '') {
-      var page = '';
+    // Burada basit bir kontrol yapılıyor. Gerçek bir uygulamada server-side doğrulama gerekir.
+    if (username !== '' && password !== '') { // Kullanıcı adı ve parola boş değilse
+      var page = ''; // Yönlendirilecek sayfa
       if (userType === 'student') {
-        page = 'student_home.html';
+        page = 'student_home.html'; // Öğrenci ana sayfası
       } else if (userType === 'admin') {
-        page = 'admin_dashboard.html';
+        page = 'admin_dashboard.html'; // Admin kontrol paneli
       } else if (userType === 'manager') {
-        page = 'manager_dashboard.html';
+        page = 'manager_dashboard.html'; // Kulüp yöneticisi kontrol paneli
       }
-      window.location.href = page;
+      window.location.href = page; // Sayfaya yönlendir
     } else {
-      alert('Please enter username and password.');
+      alert('Please enter username and password.'); // Uyarı mesajı
     }
   }
-
+  
+  // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target.classList.contains('modal')) {
       event.target.style.display = "none";
     }
   }
   </script>
-</body>
-</html>
+  <script>
+    function logout() {
+        // This will redirect to the login page
+        window.location.href = 'loginpages.html';
+    }
+    </script>
+
+  </body>
+  </html>

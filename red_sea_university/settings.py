@@ -57,7 +57,7 @@ ROOT_URLCONF = 'red_sea_university.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'student_clubs/templates'],  # Correct directory for templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

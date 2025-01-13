@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="/static/css/footer.css">
-    <link rel="stylesheet" href="/static/css/cardconteynir.css">
-    <style>
+{% include 'navbar.html' %}
+{%load static%}
+{%block content%}
+<style>
 
   /* Viewport'un tamamını kaplayacak şekilde bir konteynır oluşturuyoruz */
   .view-button-container {
@@ -91,17 +86,9 @@
 
     </style>
 </head>
-<>
+
     <div id="navbar-placeholder"></div>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        fetch('navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-placeholder').innerHTML = data;
-            });
-    });
-    </script>
+  
 
 <div class="container" >
     <div id="carouselExampleIndicators" class="carousel slide">
@@ -152,20 +139,22 @@
 
   <div class="row my-5 ">
     <div class="col-sm">
+      {%for event in events%}
       <div class="card">
-          <img src="/static/images/etkinlik3.png" class="card-img-top" alt="...">
+          <img src="{%static 'images/etkinlik3.png'%}" class="card-img-top" alt="...">
           <div class="card-body">
               <div class="card-event-date">
-                  <span class="card-icon">🗓️</span>7 Feb 2025
+                  <span class="card-icon">🗓️</span>27 Mar 2024
               </div>
-              <h5 class="card-title">Medical Skills Workshop</h5>
-              <p class="card-text">Faculty of Medicine NP Campus</p>
-              <p class="card-time">14:00</p>
+              <h5 class="card-title">{{event.event_name}}</h5>
+              <p class="card-text">{{event.event_hall}}</p>
+              <p class="card-time">16:00Pm</p>
               <div class="button-container">
                   <a href="eventinformation.html" class="fancy-button" role="button">Information For Event</a>
               </div>
 
           </div>
+          {%endfor%}
       </div>
   </div>
   <div class="col-sm">
@@ -285,3 +274,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+{%endblock%}

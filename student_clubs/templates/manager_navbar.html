@@ -1,123 +1,134 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SKS Dashboard</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-<script src="natification.js"></script>
-<style>
-    body {
-        font-family: 'Arial', sans-serif;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Club Manager Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <!-- <script src="{%static '/js/natification.js'%}"></script> -->
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
         margin: 0;
         padding-top: 60px; /* Üst navbar yüksekliğine bağlı olarak ayarlanmıştır */
         background: #f4f4f4;
-    }
+      }
 
-    /* Üst Navbar Stili */
-    .navbar {
-        background-color: #24305E; /* Karanlık mavi arka plan */
+      /* Üst Navbar Stili */
+      .navbar {
+        background-color: #24305e; /* Karanlık mavi arka plan */
         position: fixed;
         top: 0;
         width: 100%;
         z-index: 1030; /* Sidebar'dan üstte olacak */
-    }
+      }
 
-    .navbar-brand {
+      .navbar-brand {
         display: flex;
         align-items: center; /* Logo ve üniversite adını ortala */
         color: white; /* Üniversite adı rengi */
-    }
+      }
 
-    .navbar-brand img {
+      .navbar-brand img {
         height: 50px; /* Logonun yüksekliği */
         margin-right: 10px; /* Logonun sağında boşluk */
-    }
+      }
 
-    .icon-bar {
+      .icon-bar {
         display: flex;
         align-items: center;
-    }
+      }
 
-    .icon-bar a {
+      .icon-bar a {
         color: white;
         margin: 0 15px;
-    }
+      }
 
-    .icon-bar a:hover {
-        color: #F76C6C;
-    }
+      .icon-bar a:hover {
+        color: #f76c6c;
+      }
 
-    /* Yan Navbar Stili */
-    .sidebar {
+      /* Yan Navbar Stili */
+      .sidebar {
         height: 100%;
         width: 250px;
         position: fixed;
         top: 60px; /* Üst navbar yüksekliğine bağlı olarak ayarlanmıştır */
         left: 0;
-        background: #24305E;
+        background: #24305e;
         padding-top: 30px;
         z-index: 1030; /* Üst navbar ile aynı z-index değeri */
-    }
+      }
 
-    .sidebar a {
+      .sidebar a {
         padding: 10px 15px;
         text-decoration: none;
         font-size: 18px;
         color: #ddd;
         display: block;
-    }
+      }
 
-    .sidebar a:not(:first-child) {
+      .sidebar a:not(:first-child) {
         margin-top: 10px;
-    }
+      }
 
-    .sidebar a:hover {
+      .sidebar a:hover {
         background: #1abc9c;
         color: white;
-    }
+      }
 
-    .sidebar .fa {
+      .sidebar .fa {
         margin-right: 10px;
-    }
+      }
 
-    .active {
+      .active {
         background: #1abc9c;
         color: white;
-    }
+      }
 
-    @media screen and (max-height: 450px) {
-        .sidebar {padding-top: 15px;}
-        .sidebar a {font-size: 18px;}
-    }
-
-    /* İçerik için padding */
-    .main-content {
-        margin-left: 250px; /* Sidebar genişliğine bağlı olarak ayarlanmıştır */
-        padding: 20px;
-    }
-
-    @media screen and (max-width: 768px) {
-        .navbar {
-            padding: 10px 0; /* Mobil için ayarlandı */
-        }
+      @media screen and (max-height: 450px) {
         .sidebar {
-            width: 100px; /* Mobil için ayarlandı */
-        }
-        .main-content {
-            margin-left: 100px; /* Mobil için sidebar genişliğine bağlı olarak ayarlandı */
-        }
-        .sidebar .fa {
-            margin: 0; /* Mobil için ikonların yanında boşluk kaldırıldı */
+          padding-top: 15px;
         }
         .sidebar a {
-            text-align: center; /* Mobil için metni ortala */
-            padding: 10px 0; /* Mobil için padding */
-            font-size: 12px; /* Mobil için font boyutu */
+          font-size: 18px;
         }
-    }
-    .notification-panel {
+      }
+
+      /* İçerik için padding */
+      .main-content {
+        margin-left: 250px; /* Sidebar genişliğine bağlı olarak ayarlanmıştır */
+        padding: 20px;
+      }
+
+      @media screen and (max-width: 768px) {
+        .navbar {
+          padding: 10px 0; /* Mobil için ayarlandı */
+        }
+        .sidebar {
+          width: 100px; /* Mobil için ayarlandı */
+        }
+        .main-content {
+          margin-left: 100px; /* Mobil için sidebar genişliğine bağlı olarak ayarlandı */
+        }
+        .sidebar .fa {
+          margin: 0; /* Mobil için ikonların yanında boşluk kaldırıldı */
+        }
+        .sidebar a {
+          text-align: center; /* Mobil için metni ortala */
+          padding: 10px 0; /* Mobil için padding */
+          font-size: 12px; /* Mobil için font boyutu */
+        }
+      }
+      .notification-panel {
         display: none;
         position: absolute;
         right: 10px;
@@ -126,113 +137,134 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         width: 350px;
         z-index: 2000;
-    }
+      }
 
-    .notification-header {
+      .notification-header {
         padding: 10px;
-        background-color: #24305E;
+        background-color: #24305e;
         color: white;
         display: flex;
         justify-content: space-between;
         align-items: center;
-    }
+      }
 
-    .notification-content {
+      .notification-content {
         max-height: 300px;
         overflow-y: auto;
-    }
+      }
 
-    .notification-item {
+      .notification-item {
         padding: 10px;
         border-bottom: 1px solid #ddd;
         background-color: white;
-    }
+      }
 
-    .notification-item:last-child {
+      .notification-item:last-child {
         border-bottom: none;
-    }
+      }
 
-    .notification-item button {
+      .notification-item button {
         margin-left: 10px;
-    }
-    .container-fuild{
+      }
+      .container-fuild {
         position: fixed;
         top: 0;
         left: 0;
-    }
-</style>
-</head>
-<body>
-
-<!-- Üst Navbar -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Üst Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="/static/images/uskudar_uni_logo.png" alt="University Logo">
-            Club Manager Dashboard
+          <img
+            src="/static/images/uskudar_uni_logo.png"
+            alt="University Logo"
+          />
+          Club Manager Dashboard
         </a>
         <div class="icon-bar ml-auto">
-            <a href="home.html"><i class="fas fa-home"></i></a>
-            <!-- Bildirim zili butonu -->
-            <a href="#" id="notificationIcon"><i class="fas fa-bell"></i></a>
-            <a href="login.html"><i class="fas fa-sign-out-alt"></i></a>
+          <a href="home.html"><i class="fas fa-home"></i></a>
+          <!-- Bildirim zili butonu -->
+          <a href="#" id="notificationIcon"><i class="fas fa-bell"></i></a>
+          <form
+            action="{% url 'logout' %}"
+            method="post"
+            style="display: inline"
+          >
+            {% csrf_token %}
+            <button
+              type="submit"
+              style="background: transparent; color: white; border: none"
+            >
+              <i class="fas fa-sign-out-alt"></i>
+            </button>
+          </form>
         </div>
         <!-- Bildirim paneli -->
         <div class="notification-panel" id="notificationPanel">
-            <div class="notification-header">
-                <span>Notifications</span>
-                <button onclick="markAllAsRead()">Mark all as read</button>
+          <div class="notification-header">
+            <span>Notifications</span>
+            <button onclick="markAllAsRead()">Mark all as read</button>
+          </div>
+          <div class="notification-content">
+            <!-- Bildirim içerikleri -->
+            <!-- Örnek bir bildirim -->
+            <div class="notification-item">
+              International cultural Club is requesting Iftar program Event
+              <button>Approve</button>
+              <button>Decline</button>
             </div>
-            <div class="notification-content">
-                <!-- Bildirim içerikleri -->
-                <!-- Örnek bir bildirim -->
-                <div class="notification-item">
-                    International cultural Club is requesting Iftar program Event
-                    <button>Approve</button>
-                    <button>Decline</button>
-                </div>
-                <div class="notification-item">
-                    International cultural Club is requesting Iftar program Event
-                    <button>Approve</button>
-                    <button>Decline</button>
-                </div>
-                <div class="notification-item">
-                    International cultural Club is requesting Iftar program Event
-                    <button>Approve</button>
-                    <button>Decline</button>
-                </div>
-                <!-- Diğer bildirim ögeleri eklenecek -->
+            <div class="notification-item">
+              International cultural Club is requesting Iftar program Event
+              <button>Approve</button>
+              <button>Decline</button>
             </div>
+            <div class="notification-item">
+              International cultural Club is requesting Iftar program Event
+              <button>Approve</button>
+              <button>Decline</button>
+            </div>
+            <!-- Diğer bildirim ögeleri eklenecek -->
+          </div>
         </div>
+      </div>
+    </nav>
+
+    <!-- Yan Navbar -->
+    <div class="sidebar mt-3">
+      <a href="{%url 'manager_dashboard'%}"
+        ><i class="fas fa-home"></i> Dashboard</a
+      >
+      <a href="{%url 'manager_dashboard_manager'%}"
+        ><i class="fas fa-calendar"></i> Events</a
+      >
+      <a href="{%url 'manager_activity'%}"
+        ><i class="fas fa-envelope-open-text"></i> Activity Post</a
+      >
+      <a href="{%url 'logout'%}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
     </div>
-</nav>
 
-<!-- Yan Navbar -->
-<div class="sidebar mt-3">
-  <a href="manager_dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
-  <a href="manager_events.html"><i class="fas fa-calendar"></i> Events</a>
-  <a href="manager_activitypost.html"><i class="fas fa-envelope-open-text"></i> Activity Post</a>
-  <a href="loginpages.html"><i class="fas fa-sign-out-alt"></i> Log Out</a>
-</div>
+    <script>
+      // Bildirim panelini açıp kapatan fonksiyon
+      function toggleNotificationPanel() {
+        var panel = document.getElementById("notificationPanel");
+        panel.style.display =
+          panel.style.display === "block" ? "none" : "block";
+      }
 
-
-
-<script>
-    // Bildirim panelini açıp kapatan fonksiyon
-    function toggleNotificationPanel() {
-        var panel = document.getElementById('notificationPanel');
-        panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
-    }
-    
-    // Tüm bildirimleri okundu olarak işaretleme fonksiyonu
-    function markAllAsRead() {
+      // Tüm bildirimleri okundu olarak işaretleme fonksiyonu
+      function markAllAsRead() {
         // Tüm bildirimler için işlemler burada gerçekleştirilecek
         // Örneğin: Bildirimlerin okunduğunu gösteren sınıfı ekle/çıkar
         // Bu fonksiyonun içeriğini ihtiyacınıza göre doldurun
-    }
-    
-    // Bildirim simgesine event listener ekleme
-    document.getElementById('notificationIcon').addEventListener('click', toggleNotificationPanel);
+      }
+
+      // Bildirim simgesine event listener ekleme
+      document
+        .getElementById("notificationIcon")
+        .addEventListener("click", toggleNotificationPanel);
     </script>
-</body>
+  </body>
 </html>

@@ -1,150 +1,284 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-.event-table-container {
+{%extends "admin_navbar.html"%} {%block content%}
+
+<style>
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+  }
+  .dashboard-container {
+    display: flex;
+    justify-content: flex-start; /* Kartları sola yasla */
+    flex-wrap: wrap;
+    margin-top: 100px; /* Navbar yüksekliği ve ekstra boşluk */
+    margin-left: 150px; /* Kartları biraz daha sağa kaydır */
+  }
+  .main-content {
     margin-top: 100px; /* NavBar yüksekliği + istediğiniz ek boşluk */
-      margin-left: 300px; /* SideBar genişliğini artırarak kartları sağa kaydır */
-      padding: 20px;
+    margin-left: 300px; /* SideBar genişliğini artırarak kartları sağa kaydır */
+    padding: 20px;
+  }
+  /* Ana içerik kartları için stil */
+  .dashboard-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin: 20px;
+  }
 
-  font-family: Arial, sans-serif;
-}
+  .dashboard-card h3 {
+    color: #24305e;
+    margin-bottom: 10px;
+  }
 
-.event-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hafif bir gölge efekti */
-}
+  .dashboard-card .number {
+    color: #24305e;
+    font-size: 36px;
+    font-weight: bold;
+  }
 
-.event-table th,
-.event-table td {
-  text-align: left;
-  padding: 16px; /* Daha geniş padding */
-  border-bottom: 1px solid #ccc; /* Daha hafif renkli çizgi */
-}
+  .dashboard-card i {
+    color: #24305e;
+    margin: 10px;
+  }
 
-.event-table thead {
-  background-color: #f9f9f9; /* Daha açık bir başlık arka plan rengi */
-  color: #333; /* Başlık metin rengi */
-  border-bottom: 2px solid #ccc; /* Daha kalın alt çizgi */
-}
+  .dashboard-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px; /* Navbar yüksekliği ve ekstra boşluk */
+  }
+  /* Tablo ve buton stilleri */
+  .event-table-container {
+    margin-top: 100px; /* NavBar yüksekliği + istediğiniz ek boşluk */
+    margin-left: 300px; /* SideBar genişliğini artırarak kartları sağa kaydır */
+    padding: 20px;
+  }
 
-.btn {
-  padding: 8px 15px; /* Düğme boyutları */
-  border: 1px solid #ccc; /* Düğme kenar çizgisi */
-  background-color: white; /* Düğme arka plan rengi */
-  color: #555; /* Düğme metin rengi */
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px; /* Düğme metin boyutu */
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 4px; /* Düğme köşe yuvarlaklığı */
-  transition: all 0.3s ease; /* Pürüzsüz geçiş efekti */
-}
+  .event-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
 
-.btn:hover {
-  background-color: #f5f5f5; /* Üzerine gelince arka plan rengi */
-}
+  .event-table th,
+  .event-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
 
-/* İsteğe bağlı olarak Approve ve Decline düğmeleri için farklı renkler */
-.approve {
-  border-color: #4CAF50; /* Yeşil kenar çizgisi */
-  color: #4CAF50; /* Yeşil metin */
-}
+  .btn {
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease-in-out;
+  }
 
-.decline {
-  border-color: #f44336; /* Kırmızı kenar çizgisi */
-  color: #f44336; /* Kırmızı metin */
-}
+  .edit-button {
+    color: #007bff;
+    border-color: #007bff;
+  }
 
-.approve:hover {
-  border-color: #45a049; /* Üzerine gelince kenar çizgisi */
-  color: white; /* Üzerine gelince metin */
-  background-color: #45a049; /* Üzerine gelince arka plan */
-}
+  .edit-button:hover {
+    background-color: #007bff;
+    color: white;
+  }
 
-.decline:hover {
-  border-color: #d32f2f; /* Üzerine gelince kenar çizgisi */
-  color: white; /* Üzerine gelince metin */
-  background-color: #d32f2f; /* Üzerine gelince arka plan */
-}
+  /* Modal stilleri */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0, 0.4);
+  }
 
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+  }
 
-    </style>
-</head>
-<body>
-    
-    <div class="event-table-container">
-        <table class="event-table">
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Type</th>
-              <th>Time</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Tablo satırları JavaScript ile doldurulacak -->
-          </tbody>
-        </table>
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* Form stilleri */
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px;
+    margin: 5px 0 20px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type="submit"],
+  .btn.create {
+    background-color: #4caf50;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+  }
+
+  input[type="submit"]:hover,
+  .btn.create:hover {
+    background-color: #45a049;
+  }
+</style>
+
+<div class="event-table-container">
+  <table class="event-table">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Type</th>
+        <th>Time</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for event in events %}
+      <tr>
+        <td>{{ event.event_name }}</td>
+        <td>{{event.event_type}}</td>
+        <td>{{event.event_date|date:"d-m-20y"}}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-primary edit-btn"
+            data-id="{{ event.pk }}"
+            data-name="{{ event.event_name }}"
+            data-type="{{ event.event_type }}"
+          >
+            Edit
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="editEventModal" tabindex="-1" style="z-index: 9999">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Event</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal">
+          <i class="fa fa-times"></i>
+        </button>
       </div>
-      
-      <!-- JavaScript kısmı için örnek bir tablo satırı ekleme -->
-      <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var eventsData = [
-          { id: 1, event: 'Iftar Event', type: 'Social', date: '29-03-2024' },
-          { id: 2, event: 'Perfusion in Cardiovascular Surgery', type: 'Science', date: '30-03-2024' },
-          // Daha fazla etkinlik ekleyebilirsiniz...
-        ];
-      
-        var tbody = document.querySelector('.event-table tbody');
-        eventsData.forEach(function(event) {
-          var tr = document.createElement('tr');
-          tr.innerHTML = '<td>' + event.event + '</td>' +
-                         '<td>' + event.type + '</td>' +
-                         '<td>' + event.date + '</td>' +
-                         '<td>' +
-                           '<button class="btn approve" onclick="approveEvent(' + event.id + ')">Approve</button>' +
-                           '<button class="btn decline" onclick="declineEvent(' + event.id + ')">Decline</button>' +
-                         '</td>';
-          tbody.appendChild(tr);
-        });
-      });
-      
-      function approveEvent(eventId) {
-        // Onay işlemini burada gerçekleştirin
-        alert('Event with ID ' + eventId + ' approved.');
-      }
-      
-      function declineEvent(eventId) {
-        // Reddetme işlemini burada gerçekleştirin
-        alert('Event with ID ' + eventId + ' declined.');
-      }
-      </script>
-      
+      <div class="modal-body">
+        <form id="updateEventForm" method="post">
+          {% csrf_token %}
+          <input type="hidden" id="eventId" name="event_id" />
+          <label for="eventName">Event name</label>
+          <input type="text" id="modalEventName" name="event_name" />
+          <br />
+          <label for="eventType">Event type</label>
+          <input type="text" id="modalEventType" name="event_type" />
+          <br />
+          <!-- Add other fields like event_date, event_hall, etc. -->
+          <button type="submit" class="btn btn-primary">Update Event</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
+<script>
+  var pk, url;
+  document.querySelectorAll(".edit-btn").forEach((button) => {
+    button.addEventListener("click", function () {
+      const eventId = this.getAttribute("data-id");
+      const eventName = this.getAttribute("data-name");
+      const eventType = this.getAttribute("data-type");
 
-    <div id="navbar-placeholder"></div>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        fetch('admin_navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-placeholder').innerHTML = data;
-            });
+      url = `/update_event/${eventId}/`; // Adjust as per your route
+
+      // Set modal fields
+      document.getElementById("eventId").value = eventId;
+      document.getElementById("modalEventName").value = eventName;
+      document.getElementById("modalEventType").value = eventType;
+
+      // Show the modal
+      const modal = new bootstrap.Modal(
+        document.getElementById("editEventModal")
+      );
+      modal.show();
     });
-    </script>
-  <!-- Bootstrap JS ve bağımlılıkları (opsiyonel) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+  });
+
+  document
+    .getElementById("updateEventForm")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const formData = new FormData(this);
+
+      fetch(url, {
+        method: "POST",
+        body: formData,
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      }).then((response) => {
+        location.reload(); // Reload or update the page content dynamically.
+      });
+    });
+
+  document.querySelector(".btn-close").addEventListener("click", () => {
+    // After your form submission or any other action, you can close the modal like this:
+    const modal = new bootstrap.Modal(
+      document.getElementById("editEventModal")
+    );
+    modal.hide(); // Close the modal
+  });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+{%endblock%}

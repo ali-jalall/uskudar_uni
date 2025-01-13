@@ -10,7 +10,12 @@ from django.views.generic import  DetailView , ListView , CreateView , DeleteVie
 from .forms import RegisterForm
 from django.shortcuts import redirect
 from django.contrib.auth.views import LogoutView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.http import JsonResponse
+from django.views import View
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.views import View
 
 class CustomLogoutView(LogoutView):
     next_page = '/'  # This ensures redirection after logout
@@ -18,9 +23,9 @@ class CustomLogoutView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
         # Clear specific cookies
         response = super().dispatch(request, *args, **kwargs)
-        response.delete_cookie('csrftoken')  # Replace with the actual cookie name you want to clear
-        response.delete_cookie('messages')    # Delete other cookies as needed
-        response.delete_cookie('sessionid')    # Delete other cookies as needed
+        response.delete_cookie('csrftoken')
+        response.delete_cookie('messages')
+        response.delete_cookie('sessionid')
         return response
     
     def get_next_page(self):
@@ -77,9 +82,7 @@ class EventCreateView(CreateView, LoginRequiredMixin):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-    
-    '''def get_success_url(self):
-        return reverse_lazy('manager_dashboard')'''  
+     
 
 class EventUpdateView(UpdateView, LoginRequiredMixin):
     model = Event
@@ -115,8 +118,6 @@ class CreateEvent(CreateView, LoginRequiredMixin):
         form.instance.user = self.request.user
         return super().form_valid(form)
     
-    '''def get_success_url(self):
-        return reverse_lazy('manager_dashboard')'''  
 
 class UpdateEvent(UpdateView, LoginRequiredMixin):
     model = Event
@@ -126,6 +127,36 @@ class UpdateEvent(UpdateView, LoginRequiredMixin):
     context_object_name = "eventupdate"
     def get_success_url(self):
         return reverse('manager_dashboard')
+
+class UpdateEventView(View):
+    def post(self, request, *args, **kwargs):
+        try:
+            event_id = request.POST.get('event_id')
+            event_name = request.POST.get('event_name')
+            event_type = request.POST.get('event_type')
+            event = Event.objects.get(pk=event_id)
+            event.event_name = event_name
+            event.event_type = event_type
+            event.save()
+            return JsonResponse({'message': 'Event updated successfully'}, status=200)
+        except Event.DoesNotExist:
+            return JsonResponse({'error': 'Event not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+        
+class UpdateClubView(View):
+    def post(self, request, *args, **kwargs):
+        club_id = request.POST.get('club_id')
+        club_name = request.POST.get('club_name')
+        
+        try:
+            club = get_object_or_404(Club, pk=club_id)
+            club.club_name = club_name
+            club.save()
+
+            return JsonResponse({'message': 'Club updated successfully'}, status=200)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
 
 
 class ListActivity(ListView, LoginRequiredMixin):
@@ -227,6 +258,9 @@ class About(TemplateView):
 
 class StudentClubs(TemplateView):
     template_name="clubs.html"
+
+class StudentProfile(TemplateView):
+    template_name="student_profile.html"
 
 
 class StudentEvent(ListView, LoginRequiredMixin):

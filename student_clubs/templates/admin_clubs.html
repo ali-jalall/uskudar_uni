@@ -1,167 +1,215 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="natification.js"></script>
+{%extends "admin_navbar.html"%} {%load static%} {%block content%}
+<style>
+  .manage-clubs-container {
+    font-family: Arial, sans-serif;
+    margin-top: 100px; /* NavBar yüksekliği + istediğiniz ek boşluk */
+    margin-left: 300px; /* SideBar genişliğini artırarak kartları sağa kaydır */
+    padding: 20px;
+  }
 
-    <style>
-.manage-clubs-container {
-  font-family: Arial, sans-serif;
-  margin-top: 100px; /* NavBar yüksekliği + istediğiniz ek boşluk */
-      margin-left: 300px; /* SideBar genişliğini artırarak kartları sağa kaydır */
-      padding: 20px;
-}
+  .search-and-create {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
 
-.search-and-create {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
+  #searchInput {
+    padding: 8px;
+    width: 70%;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+  }
 
-#searchInput {
-  padding: 8px;
-  width: 70%;
-  margin-right: 10px;
-  border: none;
-  border-radius: 4px;
-}
+  #searchInput::placeholder {
+    color: #999;
+  }
 
-#searchInput::placeholder {
-  color: #999;
-}
+  .create-club-button {
+    background-color: #5cb85c; /* Yeşil arka plan */
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    color: white;
+    cursor: pointer;
+  }
 
-.create-club-button {
-  background-color: #5cb85c; /* Yeşil arka plan */
-  border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
-  color: white;
-  cursor: pointer;
-}
+  .create-club-button:hover {
+    background-color: #4cae4c; /* Daha koyu yeşil arka plan */
+  }
 
-.create-club-button:hover {
-  background-color: #4cae4c; /* Daha koyu yeşil arka plan */
-}
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
+  th,
+  td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
 
-th, td {
-  text-align: left;
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-}
+  .edit-button,
+  .delete-button {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+  }
 
-.edit-button, .delete-button {
-  padding: 4px 8px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 5px;
-}
+  .edit-button {
+    background-color: #0275d8; /* Mavi arka plan */
+    color: white;
+  }
 
-.edit-button {
-  background-color: #0275d8; /* Mavi arka plan */
-  color: white;
-}
+  .delete-button {
+    background-color: #d9534f; /* Kırmızı arka plan */
+    color: white;
+  }
 
-.delete-button {
-  background-color: #d9534f; /* Kırmızı arka plan */
-  color: white;
-}
+  .edit-button:hover {
+    background-color: #025aa5; /* Daha koyu mavi arka plan */
+  }
 
-.edit-button:hover {
-  background-color: #025aa5; /* Daha koyu mavi arka plan */
-}
+  .delete-button:hover {
+    background-color: #c9302c; /* Daha koyu kırmızı arka plan */
+  }
+</style>
+<div class="manage-clubs-container">
+  <div class="search-and-create">
+    <input type="text" id="searchInput" placeholder="Search" />
+    <button class="create-club-button">
+      <a
+        style="text-decoration: none; color: white"
+        href="{%url 'create_club'%}"
+        >Create Club</a
+      >
+    </button>
+  </div>
 
-.delete-button:hover {
-  background-color: #c9302c; /* Daha koyu kırmızı arka plan */
-}
+  <table id="clubsTable">
+    <thead>
+      <tr>
+        <th>CN</th>
+        <th>Names</th>
+        <th>Admin</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for club in clubs %}
+      <tr>
+        <td>{{club.club_id }}</td>
+        <td>{{club.club_name }}</td>
+        <td>{{club.club_manager.fullName}}</td>
+        <td>{{club.club_status}}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-primary edit-btn"
+            data-id="{{ club.pk }}"
+            data-name="{{ club.club_name }}"
+          >
+            Edit
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-    </style>
-</head>
-<body>
-    <div class="manage-clubs-container">
-        <div class="search-and-create">
-          <input type="text" id="searchInput" placeholder="Search">
-          <button class="create-club-button" onclick="createClub()">Create Club</button>
+  <!-- Edit Club Modal -->
+  <div class="modal" id="editClubModal" tabindex="-1" style="z-index: 9999">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Club</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal">
+            <i class="fa fa-times"></i>
+          </button>
         </div>
-      
-        <table id="clubsTable">
-          <thead>
-            <tr>
-              <th>CN</th>
-              <th>Names</th>
-              <th>Admin</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Tablo verisi JavaScript ile doldurulacak -->
-          </tbody>
-        </table>
+        <div class="modal-body">
+          <form id="updateClubForm" method="post">
+            {% csrf_token %}
+            <input type="hidden" id="clubId" name="club_id" />
+            <label for="clubName">Club Name</label>
+            <input type="text" id="modalClubName" name="club_name" />
+            <br />
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="background-color: #007bff"
+            >
+              Save Changes
+            </button>
+          </form>
+        </div>
       </div>
-      <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // Tablo verilerinizi buraya ekleyin
-        var clubsData = [
-          { cn: 1, name: 'Ai club', admin: 'Farah' },
-          { cn: 2, name: 'Medical tech club', admin: 'Xalimo' },
-          // ... diğer kulüpler ...
-        ];
-      
-        // Tabloyu doldur
-        var tbody = document.querySelector('#clubsTable tbody');
-        clubsData.forEach(function(club) {
-          var tr = document.createElement('tr');
-          tr.innerHTML = '<td>' + club.cn + '</td>' +
-               '<td>' + club.name + '</td>' +
-               '<td>' + club.admin + '</td>' +
-               '<td><button class="edit-button" onclick="editClub(' + club.cn + ')">Edit</button>' +
-               '<button class="delete-button" onclick="deleteClub(' + club.cn + ')">Delete</button></td>';
-          tbody.appendChild(tr);
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll(".edit-btn").forEach((button) => {
+    button.addEventListener("click", function () {
+      const clubId = this.getAttribute("data-id");
+      const clubName = this.getAttribute("data-name");
+
+      // Set the modal values
+      document.getElementById("clubId").value = clubId;
+      document.getElementById("modalClubName").value = clubName;
+
+      // Show the modal
+      const modal = new bootstrap.Modal(
+        document.getElementById("editClubModal")
+      );
+      modal.show();
+    });
+  });
+
+  document.querySelector(".btn-close").addEventListener("click", () => {
+    // After your form submission or any other action, you can close the modal like this:
+    const modal = new bootstrap.Modal(
+      document.getElementById("editEventModal")
+    );
+    modal.hide(); // Close the modal
+  });
+
+  document
+    .getElementById("updateClubForm")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+
+      fetch(`/update_club/${document.getElementById("clubId").value}/`, {
+        method: "POST",
+        body: formData,
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message) {
+            alert(data.message); // Display success message
+            location.reload(); // Reload the page or update the list dynamically
+          } else if (data.error) {
+            alert(data.error); // Display error message
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
         });
-      });
-      
-      // Kulüp oluştur fonksiyonu
-      function createClub() {
-        alert('Create Club clicked!');
-      }
-      
-      // Kulüp düzenle fonksiyonu
-      function editClub(cn) {
-        alert('Edit clicked for club number ' + cn);
-      }
-      
-      // Kulüp sil fonksiyonu
-      function deleteClub(cn) {
-        var response = confirm('Are you sure you want to delete club number ' + cn + '?');
-        if (response) {
-          // Silme işlemini burada gerçekleştir
-          alert('Club number ' + cn + ' deleted');
-        }
-      }
-    </script>
+    });
 
-      <div id="navbar-placeholder"></div>
-      <script>
-      document.addEventListener("DOMContentLoaded", function() {
-          fetch('admin_navbar.html')
-              .then(response => response.text())
-              .then(data => {
-                  document.getElementById('navbar-placeholder').innerHTML = data;
-              });
-      });
-      </script>
-    <!-- Bootstrap JS ve bağımlılıkları (opsiyonel) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</script>
 
-</body>
-</html>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+{%endblock%}
